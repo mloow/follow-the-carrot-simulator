@@ -75,7 +75,6 @@ public class TriangleTest {
     @Test
     public void shouldReturnCloseToCorrectAngleOnGetAngleInVertex() throws Exception {
 
-        System.out.println(triangle.getAngleInVertex(v2, Triangle.SUGGESTED_ERROR));
         assertTrue(90.0 == triangle.getAngleInVertex(v2, Triangle.SUGGESTED_ERROR));
     }
 

@@ -59,4 +59,18 @@ public class EdgeTest {
 
         assertEquals(new Vertex(-1, 0), edge.getClosestVertexOnEdge(vertex));
     }
+
+    @Test
+    public void shouldReturnCorrectVertexFromGetVertexOnEdgeAtDistance() throws Exception {
+
+        Vertex start = new Vertex(-1, -1);
+        Vertex end = new Vertex(5, 7);
+        Edge e = new Edge(start, end);
+
+        Vertex expected = new Vertex(2, 3);
+
+        Vertex actual = e.getVertexOnEdgeAtDistance(5);
+
+        assertEquals(expected, actual);
+    }
 }

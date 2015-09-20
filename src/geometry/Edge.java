@@ -14,7 +14,7 @@ public class Edge {
     }
 
     public double getLength() {
-        return Math.hypot(start.x - end.x, start.y - end.y);
+        return start.distanceTo(end);
     }
 
     public boolean contains(Vertex v) {
@@ -67,5 +67,16 @@ public class Edge {
         }
 
         return closest;
+    }
+
+    public Vertex getVertexOnEdgeAtDistance(double distance) {
+
+        double ratio = distance / getLength();
+
+        double x = ratio * (end.x - start.x);
+        double y = ratio * (end.y - start.y);
+
+        return start.concat(new Vertex(x, y));
+
     }
 }
