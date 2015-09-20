@@ -20,7 +20,9 @@ public class FieldPanel extends JPanel {
     private boolean drawPathEnabled = true;
     private boolean drawClosestLineEnabled = false;
     private boolean drawCarrotPathEnabled = false;
+    private boolean drawCarrotPointEnabled = false;
     private double lookAheadDistance = 100;
+    private boolean robotPositionLocked;
 
     public FieldPanel() {
         super();
@@ -37,6 +39,10 @@ public class FieldPanel extends JPanel {
 
         drawBackground(graphics);
 
+        if(field.isRobotPositionLocked()) {
+            drawPoint((int)field.getRobotPosition().x, (int) field.getRobotPosition().y, Color.pink, graphics);
+        }
+
         if(drawTriangleEnabled || drawClosestLineEnabled) {
             drawClosestLine(graphics);
         }
@@ -45,7 +51,7 @@ public class FieldPanel extends JPanel {
             drawPath(graphics);
         }
 
-        if(drawCarrotPathEnabled) {
+        if(drawCarrotPathEnabled || drawCarrotPointEnabled) {
             drawCarrotPath(graphics);
         }
     }
@@ -54,19 +60,29 @@ public class FieldPanel extends JPanel {
 
         Graphics2D g2d = (Graphics2D) graphics;
         g2d.setColor(new Color(255, 128, 0));
-        g2d.setStroke(new BasicStroke(4));
+        g2d.setStroke(new BasicStroke(3));
         ArrayList<Edge> carrotPath = field.getPath().getCarrotPathFrom(field.getRobotPosition(), lookAheadDistance);
-
-        for(Edge e : carrotPath) {
-            g2d.draw(new Line2D.Float((int) e.start.x, (int) e.start.y, (int) e.end.x, (int) e.end.y));
+        if(drawCarrotPathEnabled) {
+            for(Edge e : carrotPath) {
+                g2d.draw(new Line2D.Float((int) e.start.x, (int) e.start.y, (int) e.end.x, (int) e.end.y));
+            }
         }
 
         if(!carrotPath.isEmpty())
         {
-            Vertex lastVertex = carrotPath.get(carrotPath.size()-1).end;
-            drawPoint((int) lastVertex.x, (int) lastVertex.y, new Color(255, 128, 0), graphics);
+            Vertex carrotPoint = carrotPath.get(carrotPath.size()-1).end;
+            drawPoint((int) carrotPoint.x, (int) carrotPoint.y, new Color(255, 128, 0), graphics);
+            if(drawCarrotPointEnabled) {
+                drawCarrotPointCoordinates(carrotPoint, graphics);
+            }
         }
+    }
 
+    private void drawCarrotPointCoordinates(Vertex carrotPoint, Graphics graphics) {
+
+        String s = String.format("(%.1f, %.1f)", carrotPoint.x, carrotPoint.y);
+
+        graphics.drawString(s, (int) carrotPoint.x + 25, (int) carrotPoint.y + 25);
     }
 
     private void drawBackground(Graphics graphics) {
@@ -155,4 +171,9 @@ public class FieldPanel extends JPanel {
     public boolean isDrawCarrotPathEnabled() {
         return drawCarrotPathEnabled;
     }
+
+    public void setDrawCarrotPointEnabled(boolean drawCarrotPointEnabled) {
+        this.drawCarrotPointEnabled = drawCarrotPointEnabled;
+    }
+
 }

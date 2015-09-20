@@ -16,38 +16,44 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener {
 
     private static final double EDGE_LENGTH = 20.0;
     private final Field field;
-    private final JList<String> edgeList;
     private final FieldPanel fieldPanel;
     private Vertex lastAdded = new Vertex(0, 0);
 
-    public FieldMouseListener(FieldPanel fieldPanel, JList<String> edgeList) {
+    public FieldMouseListener(FieldPanel fieldPanel) {
         this.fieldPanel = fieldPanel;
         this.field = fieldPanel.getField();
-        this.edgeList = edgeList;
     }
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
+        if(SwingUtilities.isRightMouseButton(mouseEvent)) {
+            field.invertRobotPositionLock();
+            if(field.isRobotPositionLocked()) {
+                fieldPanel.repaint();
+            }
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        lastAdded = new Vertex(mouseEvent.getX(), mouseEvent.getY());
-        field.getPath().concatPath(lastAdded);
-        edgeList.setListData(field.getPath().getPathAsStringArray());
-        fieldPanel.repaint();
+        if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
+            lastAdded = new Vertex(mouseEvent.getX(), mouseEvent.getY());
+            field.getPath().concatPath(lastAdded);
+            fieldPanel.repaint();
+        }
 
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
+        if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
+            Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
 
-        if(!mousePos.equals(lastAdded)) {
-            field.getPath().concatPath(mousePos);
-            edgeList.setListData(field.getPath().getPathAsStringArray());
-            fieldPanel.repaint();
+            if (!mousePos.equals(lastAdded)) {
+                field.getPath().concatPath(mousePos);
+                fieldPanel.repaint();
+            }
         }
 
     }
@@ -65,14 +71,16 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
 
-        Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
-        if(lastAdded != null) {
 
-            if(lastAdded.distanceTo(mousePos) >= EDGE_LENGTH) {
-                field.getPath().concatPath(mousePos);
-                edgeList.setListData(field.getPath().getPathAsStringArray());
-                fieldPanel.repaint();
-                lastAdded = mousePos;
+        if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
+            Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
+            if (lastAdded != null) {
+
+                if (lastAdded.distanceTo(mousePos) >= EDGE_LENGTH) {
+                    field.getPath().concatPath(mousePos);
+                    fieldPanel.repaint();
+                    lastAdded = mousePos;
+                }
             }
         }
     }
@@ -80,15 +88,16 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
 
-        boolean oldDrawPath = fieldPanel.isDrawPathEnabled();
-        Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
+        if(!field.isRobotPositionLocked()){
+            boolean oldDrawPath = fieldPanel.isDrawPathEnabled();
+            Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
 
-        fieldPanel.setDrawPathEnabled(false);
+            fieldPanel.setDrawPathEnabled(false);
 
-        fieldPanel.getField().setRobotPosition(mousePos);
-        fieldPanel.repaint();
+            field.setRobotPosition(mousePos);
+            fieldPanel.repaint();
 
-        fieldPanel.setDrawPathEnabled(oldDrawPath);
-
+            fieldPanel.setDrawPathEnabled(oldDrawPath);
+        }
     }
 }

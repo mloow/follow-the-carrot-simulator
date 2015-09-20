@@ -14,12 +14,16 @@ public class Field {
 
     private Path path;
     private Vertex robotPosition = null;
+    private boolean robotPositionLocked;
 
     public Field() {
         this.path = new Path();
     }
 
     public void setRobotPosition(Vertex robotPosition) {
+
+        if(robotPositionLocked) return;
+
         this.robotPosition = robotPosition;
     }
 
@@ -34,5 +38,17 @@ public class Field {
     public void clear() {
         path.clear();
         robotPosition = null;
+    }
+
+    public void invertRobotPositionLock() {
+        robotPositionLocked = !robotPositionLocked;
+    }
+
+    public boolean isRobotPositionLocked() {
+        return robotPositionLocked;
+    }
+
+    public void setRobotPositionLocked(boolean robotPositionLocked) {
+        this.robotPositionLocked = robotPositionLocked;
     }
 }

@@ -38,6 +38,9 @@ public class Edge {
 
     public Vertex getClosestVertexOnEdge(Vertex vertex) {
 
+        if(start.equals(end)) {
+            return start;
+        }
         Vertex closest;
         Triangle triangle = new Triangle(start, end, vertex);
         Vertex v = end.differenceTo(start);

@@ -13,26 +13,23 @@ import java.awt.event.*;
 public class SimGui {
 
     private JPanel panel;
-    private JList<String> edgeList;
     private FieldPanel fieldPanel;
-    private JScrollPane edgesScrollPane;
     private JButton clearPathButton;
     private JCheckBox drawTriangleCheckBox;
     private JCheckBox drawClosestLineCheckBox;
     private JCheckBox drawPathCheckBox;
     private JSlider carrotLengthSlider;
     private JCheckBox drawCarrotPathCheckBox;
+    private JCheckBox showCarrotPointCoordsCheckBox;
 
     public SimGui() {
 
-        fieldPanel.addMouseListener(new FieldMouseListener(fieldPanel, edgeList));
-        fieldPanel.addMouseMotionListener(new FieldMouseListener(fieldPanel, edgeList));
+        fieldPanel.addMouseListener(new FieldMouseListener(fieldPanel));
+        fieldPanel.addMouseMotionListener(new FieldMouseListener(fieldPanel));
         clearPathButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 fieldPanel.getField().clear();
-                edgeList.removeAll();
-                edgeList.revalidate();
                 fieldPanel.repaint();
             }
         });
@@ -42,6 +39,7 @@ public class SimGui {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
                 fieldPanel.setLookAheadDistance(carrotLengthSlider.getValue());
+                fieldPanel.repaint();
             }
         });
     }
@@ -72,6 +70,14 @@ public class SimGui {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 fieldPanel.setDrawCarrotPathEnabled(drawCarrotPathCheckBox.isSelected());
+                fieldPanel.repaint();
+            }
+        });
+
+        showCarrotPointCoordsCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                fieldPanel.setDrawCarrotPointEnabled(showCarrotPointCoordsCheckBox.isSelected());
                 fieldPanel.repaint();
             }
         });
