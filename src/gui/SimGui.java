@@ -14,13 +14,18 @@ public class SimGui {
     private JList<String> edgeList;
     private FieldPanel fieldPanel;
     private JScrollPane edgesScrollPane;
-    private JButton clearEdgesButton;
+    private JButton clearPathButton;
+    private JCheckBox drawTriangleCheckBox;
+    private JCheckBox drawClosestLineCheckBox;
+    private JCheckBox drawPathVerticesCheckBox;
+    private JCheckBox drawPathCheckBox;
+    private JSlider slider1;
 
     public SimGui() {
 
         fieldPanel.addMouseListener(new FieldMouseListener(fieldPanel, edgeList));
         fieldPanel.addMouseMotionListener(new FieldMouseListener(fieldPanel, edgeList));
-        clearEdgesButton.addActionListener(new ActionListener() {
+        clearPathButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 fieldPanel.getField().clear();
@@ -28,9 +33,38 @@ public class SimGui {
                 fieldPanel.repaint();
             }
         });
+
+        drawTriangleCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                fieldPanel.setDrawTriangle(drawTriangleCheckBox.isSelected());
+                fieldPanel.repaint();
+            }
+        });
+        drawClosestLineCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                fieldPanel.setDrawClosestLine(drawClosestLineCheckBox.isSelected());
+                fieldPanel.repaint();
+            }
+        });
+
+        drawPathVerticesCheckBox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                fieldPanel.setDrawPathVertices(drawPathVerticesCheckBox.isSelected());
+                fieldPanel.repaint();
+            }
+        });
+        drawPathCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                fieldPanel.setDrawPath(drawPathCheckBox.isSelected());
+                fieldPanel.repaint();
+            }
+        });
     }
-
-
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("SimGui");
