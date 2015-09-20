@@ -151,4 +151,8 @@ public class FieldPanel extends JPanel {
     public void setDrawCarrotPathEnabled(boolean drawCarrotPathEnabled) {
         this.drawCarrotPathEnabled = drawCarrotPathEnabled;
     }
+
+    public boolean isDrawCarrotPathEnabled() {
+        return drawCarrotPathEnabled;
+    }
 }

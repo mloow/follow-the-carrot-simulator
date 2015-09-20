@@ -93,7 +93,9 @@ public class Path {
                 }
                 // else we have arrived
             } else {
-                remainingDistance = 0;
+                if(!start.equals(end)) {
+                    remainingDistance = 0;
+                }
             }
 
             // Add the edge to the carrotPath

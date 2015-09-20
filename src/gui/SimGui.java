@@ -50,35 +50,35 @@ public class SimGui {
         drawTriangleCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawTriangleEnabled(drawTriangleCheckBox.isEnabled());
+                fieldPanel.setDrawTriangleEnabled(drawTriangleCheckBox.isSelected());
                 fieldPanel.repaint();
             }
         });
         drawClosestLineCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawClosestLineEnabled(drawClosestLineCheckBox.isEnabled());
+                fieldPanel.setDrawClosestLineEnabled(drawClosestLineCheckBox.isSelected());
                 fieldPanel.repaint();
             }
         });
         drawPathCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawPathEnabled(drawPathCheckBox.isEnabled());
+                fieldPanel.setDrawPathEnabled(drawPathCheckBox.isSelected());
                 fieldPanel.repaint();
             }
         });
         drawCarrotPathCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawCarrotPathEnabled(drawCarrotPathCheckBox.isEnabled());
+                fieldPanel.setDrawCarrotPathEnabled(drawCarrotPathCheckBox.isSelected());
                 fieldPanel.repaint();
             }
         });
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("SimGui");
+        JFrame frame = new JFrame("Follow the carrot simulator");
         frame.setContentPane(new SimGui().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
