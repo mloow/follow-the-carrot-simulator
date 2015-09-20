@@ -30,13 +30,10 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        try {
-            field.concatPath(new Vertex(mouseEvent.getX(), mouseEvent.getY()));
-            edgeList.setListData(field.getPathAsStringArray());
-            fieldPanel.repaint();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+
+        field.getPath().concatPath(new Vertex(mouseEvent.getX(), mouseEvent.getY()));
+        edgeList.setListData(field.getPath().getPathAsStringArray());
+        fieldPanel.repaint();
 
     }
 
@@ -62,16 +59,13 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
 
-        boolean oldDrawPath = fieldPanel.isDrawPath();
-        boolean oldDrawPathVertices = fieldPanel.isDrawPathVertices();
+        boolean oldDrawPath = fieldPanel.isDrawPathEnabled();
 
-        fieldPanel.setDrawPath(false);
-        fieldPanel.setDrawPathVertices(false);
+        fieldPanel.setDrawPathEnabled(false);
 
         fieldPanel.getField().setRobotPosition(new Vertex(mouseEvent.getX(), mouseEvent.getY()));
         fieldPanel.repaint();
 
-        fieldPanel.setDrawPath(oldDrawPath);
-        fieldPanel.setDrawPathVertices(oldDrawPathVertices);
+        fieldPanel.setDrawPathEnabled(oldDrawPath);
     }
 }

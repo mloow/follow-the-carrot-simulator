@@ -69,7 +69,7 @@ public class EdgeTest {
 
         Vertex expected = new Vertex(2, 3);
 
-        Vertex actual = e.getVertexOnEdgeAtDistance(5);
+        Vertex actual = e.getVertexAlongEdgeAtDistance(5);
 
         assertEquals(expected, actual);
     }

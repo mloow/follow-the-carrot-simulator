@@ -3,6 +3,8 @@ package gui;
 import controller.FieldMouseListener;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.*;
 
 /**
@@ -17,9 +19,9 @@ public class SimGui {
     private JButton clearPathButton;
     private JCheckBox drawTriangleCheckBox;
     private JCheckBox drawClosestLineCheckBox;
-    private JCheckBox drawPathVerticesCheckBox;
     private JCheckBox drawPathCheckBox;
-    private JSlider slider1;
+    private JSlider carrotLengthSlider;
+    private JCheckBox drawCarrotPathCheckBox;
 
     public SimGui() {
 
@@ -30,37 +32,46 @@ public class SimGui {
             public void actionPerformed(ActionEvent actionEvent) {
                 fieldPanel.getField().clear();
                 edgeList.removeAll();
+                edgeList.revalidate();
                 fieldPanel.repaint();
             }
         });
 
+        addCheckboxListeners();
+        carrotLengthSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent changeEvent) {
+                fieldPanel.setLookAheadDistance(carrotLengthSlider.getValue());
+            }
+        });
+    }
+
+    private void addCheckboxListeners() {
         drawTriangleCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawTriangle(drawTriangleCheckBox.isSelected());
+                fieldPanel.setDrawTriangleEnabled(drawTriangleCheckBox.isEnabled());
                 fieldPanel.repaint();
             }
         });
         drawClosestLineCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawClosestLine(drawClosestLineCheckBox.isSelected());
-                fieldPanel.repaint();
-            }
-        });
-
-        drawPathVerticesCheckBox.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawPathVertices(drawPathVerticesCheckBox.isSelected());
+                fieldPanel.setDrawClosestLineEnabled(drawClosestLineCheckBox.isEnabled());
                 fieldPanel.repaint();
             }
         });
         drawPathCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawPath(drawPathCheckBox.isSelected());
+                fieldPanel.setDrawPathEnabled(drawPathCheckBox.isEnabled());
+                fieldPanel.repaint();
+            }
+        });
+        drawCarrotPathCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                fieldPanel.setDrawCarrotPathEnabled(drawCarrotPathCheckBox.isEnabled());
                 fieldPanel.repaint();
             }
         });

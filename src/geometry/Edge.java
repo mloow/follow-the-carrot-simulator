@@ -69,7 +69,11 @@ public class Edge {
         return closest;
     }
 
-    public Vertex getVertexOnEdgeAtDistance(double distance) {
+    public Vertex getVertexAlongEdgeAtDistance(double distance) {
+
+        if(start.equals(end)) {
+            return end;
+        }
 
         double ratio = distance / getLength();
 
