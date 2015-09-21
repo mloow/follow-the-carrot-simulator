@@ -9,6 +9,7 @@ public class Edge {
     public Vertex end;
 
     public Edge(Vertex start, Vertex end) {
+
         this.start = start;
         this.end = end;
     }
@@ -53,6 +54,7 @@ public class Edge {
         double angleInStart;
         double angleInEnd;
 
+
         try {
             angleInStart = triangle.getAngleInVertex(start, Triangle.SUGGESTED_ERROR);
             angleInEnd = triangle.getAngleInVertex(end, Triangle.SUGGESTED_ERROR);
@@ -61,10 +63,19 @@ public class Edge {
             angleInEnd = 0;
         }
 
+
         if (angleInStart >= 90) {
             closest = start;
         } else if (angleInEnd >= 90) {
             closest = end;
+        } else if (angleInStart == 0 && angleInEnd == 0) {
+
+            if(c1 < 0) {
+                closest = start;
+            } else {
+                closest = end;
+            }
+
         } else {
             closest = start.concat(v.scale(b));
         }
