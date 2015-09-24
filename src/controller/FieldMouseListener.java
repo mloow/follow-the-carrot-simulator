@@ -1,23 +1,23 @@
 package controller;
 
 import geometry.Vertex;
+import graphing.Point;
 import gui.FieldPanel;
 import simulation.Field;
 
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 /**
  * Created by marcus on 2015-09-19.
  */
-public class FieldMouseListener implements MouseListener, MouseMotionListener {
+public class FieldMouseListener implements MouseListener, MouseMotionListener, MouseWheelListener {
 
     private static final double EDGE_LENGTH = 20.0;
     private final Field field;
     private final FieldPanel fieldPanel;
-    private Vertex lastAdded = new Vertex(0, 0);
+    private Vertex lastAdded = null;
+    private boolean robotPosLocked = false;
 
     public FieldMouseListener(FieldPanel fieldPanel) {
         this.fieldPanel = fieldPanel;
@@ -27,34 +27,28 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener {
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
-        if(SwingUtilities.isRightMouseButton(mouseEvent)) {
-            field.invertRobotPositionLock();
-            if(field.isRobotPositionLocked()) {
-                fieldPanel.repaint();
-            }
-        }
     }
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
+
         if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
-            lastAdded = new Vertex(mouseEvent.getX(), mouseEvent.getY());
-            field.getPath().concatPath(lastAdded);
+            Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
+            if (!mousePos.equals(lastAdded)) {
+                field.getPath().concatPath(mousePos);
+                fieldPanel.repaint();
+                lastAdded = mousePos;
+            }
+        } else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
+            robotPosLocked = !robotPosLocked;
+            fieldPanel.setDrawRobotEnabled(robotPosLocked);
+            field.getRobot().setPosition(new Point(mouseEvent.getX(), mouseEvent.getY()));
             fieldPanel.repaint();
         }
-
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
-            Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
-
-            if (!mousePos.equals(lastAdded)) {
-                field.getPath().concatPath(mousePos);
-                fieldPanel.repaint();
-            }
-        }
 
     }
 
@@ -70,7 +64,6 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
-
 
         if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
             Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
@@ -88,16 +81,29 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
 
-        if(!field.isRobotPositionLocked()){
+        if(!robotPosLocked){
             boolean oldDrawPath = fieldPanel.isDrawPathEnabled();
-            Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
+            Point mousePos = new Point(mouseEvent.getX(), mouseEvent.getY());
 
             fieldPanel.setDrawPathEnabled(false);
 
-            field.setRobotPosition(mousePos);
+            field.getRobot().setPosition(mousePos);
+
             fieldPanel.repaint();
 
             fieldPanel.setDrawPathEnabled(oldDrawPath);
         }
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent) {
+
+        if(mouseWheelEvent.getWheelRotation() < 0) {
+            field.getRobot().turn(Math.PI / 16);
+        } else {
+            field.getRobot().turn(-Math.PI / 16);
+        }
+        fieldPanel.repaint();
+
     }
 }

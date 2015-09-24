@@ -2,7 +2,9 @@ package gui;
 
 import geometry.Edge;
 import geometry.Vertex;
+import graphing.Vector;
 import simulation.Field;
+import graphing.Point;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +24,7 @@ public class FieldPanel extends JPanel {
     private boolean drawCarrotPathEnabled = false;
     private boolean drawCarrotPointEnabled = false;
     private double lookAheadDistance = 100;
-    private boolean robotPositionLocked;
+    private boolean drawRobotEnabled;
 
     public FieldPanel() {
         super();
@@ -39,8 +41,8 @@ public class FieldPanel extends JPanel {
 
         drawBackground(graphics);
 
-        if(field.isRobotPositionLocked()) {
-            drawPoint((int)field.getRobotPosition().x, (int) field.getRobotPosition().y, Color.pink, graphics);
+        if(drawRobotEnabled) {
+            drawRobot(graphics);
         }
 
         if(drawTriangleEnabled || drawClosestLineEnabled) {
@@ -56,12 +58,34 @@ public class FieldPanel extends JPanel {
         }
     }
 
+    private void drawRobot(Graphics graphics) {
+        Point robotPos = field.getRobot().getPosition();
+        if(robotPos != null) {
+            int x1 = (int) robotPos.getX();
+            int y1 = (int) robotPos.getY();
+            drawPoint(x1, y1, Color.pink, graphics);
+
+            Vector orientation = field.getRobot().getVelocity().normalize().scale(2).scale(10);
+
+
+            int x2 = (int) (x1 + orientation.getX());
+            int y2 = (int) (y1 + orientation.getY());
+
+
+            graphics.drawLine(x1, y1, x2, y2);
+        }
+    }
+
     private void drawCarrotPath(Graphics graphics) {
 
         Graphics2D g2d = (Graphics2D) graphics;
         g2d.setColor(new Color(255, 128, 0));
         g2d.setStroke(new BasicStroke(3));
-        ArrayList<Edge> carrotPath = field.getPath().getCarrotPathFrom(field.getRobotPosition(), lookAheadDistance);
+
+        Vertex robotPos = Vertex.fromPoint(field.getRobot().getPosition());
+
+        ArrayList<Edge> carrotPath = field.getPath().getCarrotPathFrom(robotPos, lookAheadDistance);
+
         if(drawCarrotPathEnabled) {
             for(Edge e : carrotPath) {
                 g2d.draw(new Line2D.Float((int) e.start.x, (int) e.start.y, (int) e.end.x, (int) e.end.y));
@@ -106,16 +130,16 @@ public class FieldPanel extends JPanel {
             g2d.setStroke(new BasicStroke(4));
             g2d.draw(new Line2D.Float((int) e.start.x, (int) e.start.y, (int) e.end.x, (int) e.end.y));
 
-            if(i > 0) {
-                drawPoint((int)e.start.x, (int)e.start.y, Color.cyan, graphics);
-            } else {
-            }
-            drawPoint((int) e.end.x, (int) e.end.y, Color.red, graphics);
+        }
+        Vertex end = field.getPath().getEnd();
+        if(end != null) {
+
+            drawPoint((int) end.x, (int) end.y, Color.red, graphics);
         }
     }
 
     private void drawClosestLine(Graphics graphics) {
-        Vertex robotPos = field.getRobotPosition();
+        Vertex robotPos = Vertex.fromPoint(field.getRobot().getPosition());
         if(robotPos != null) {
             Edge e = field.getPath().getClosestEdgeToVertex(robotPos);
             if(e != null) {
@@ -168,12 +192,12 @@ public class FieldPanel extends JPanel {
         this.drawCarrotPathEnabled = drawCarrotPathEnabled;
     }
 
-    public boolean isDrawCarrotPathEnabled() {
-        return drawCarrotPathEnabled;
-    }
-
     public void setDrawCarrotPointEnabled(boolean drawCarrotPointEnabled) {
         this.drawCarrotPointEnabled = drawCarrotPointEnabled;
     }
 
+
+    public void setDrawRobotEnabled(boolean drawRobotEnabled) {
+        this.drawRobotEnabled = drawRobotEnabled;
+    }
 }

@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7afc1a09-596f-4960-b7b3-a741bec2d209" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/simulation/Mover2D.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/Mover2DTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/graphing/Point.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/simulation/Robot.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/graphing/Vector.java" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/controller/CarrotSimMain.java" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/FieldTest.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simulation/Field.java" afterPath="$PROJECT_DIR$/src/simulation/Field.java" />
@@ -945,7 +940,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442852368364</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added Mover2D and Robot class and supporting classes Point and Vector.">
+      <created>1443132536949</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1443132536949</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1006,7 +1007,8 @@
     <MESSAGE value="Improved mouse listener to allow easier path drawing." />
     <MESSAGE value="Added option to lock robot position" />
     <MESSAGE value="Fixed bug when both angles was equal to zero" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug when both angles was equal to zero" />
+    <MESSAGE value="Added Mover2D and Robot class and supporting classes Point and Vector." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Mover2D and Robot class and supporting classes Point and Vector." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

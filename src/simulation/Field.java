@@ -13,22 +13,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Field {
 
     private Path path;
-    private Vertex robotPosition = null;
-    private boolean robotPositionLocked;
+    private Robot robot;
 
     public Field() {
         this.path = new Path();
-    }
-
-    public void setRobotPosition(Vertex robotPosition) {
-
-        if(robotPositionLocked) return;
-
-        this.robotPosition = robotPosition;
-    }
-
-    public Vertex getRobotPosition() {
-        return this.robotPosition;
+        this.robot = new Robot(Robot.DEFAULT_LOOK_AHEAD_DISTANCE);
     }
 
     public Path getPath() {
@@ -37,18 +26,11 @@ public class Field {
 
     public void clear() {
         path.clear();
-        robotPosition = null;
+        robot = new Robot(Robot.DEFAULT_LOOK_AHEAD_DISTANCE);
     }
 
-    public void invertRobotPositionLock() {
-        robotPositionLocked = !robotPositionLocked;
+    public Robot getRobot() {
+        return this.robot;
     }
 
-    public boolean isRobotPositionLocked() {
-        return robotPositionLocked;
-    }
-
-    public void setRobotPositionLocked(boolean robotPositionLocked) {
-        this.robotPositionLocked = robotPositionLocked;
-    }
 }

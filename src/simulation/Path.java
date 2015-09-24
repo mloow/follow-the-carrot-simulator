@@ -12,7 +12,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Path {
 
     private CopyOnWriteArrayList<Edge> edges;
-    private Vertex pathStart = null;
     private Vertex lastAddedVertex = null;
 
     public Path() {
@@ -27,7 +26,6 @@ public class Path {
 
         if(lastAddedVertex == null) {
             lastAddedVertex = vertex;
-            pathStart = vertex;
         } else {
             edges.add(new Edge(lastAddedVertex, vertex));
             lastAddedVertex =  vertex;
@@ -58,7 +56,7 @@ public class Path {
 
     public Edge getClosestEdgeToVertex(Vertex vertex) {
         int index = getIndexOfClosestEdgeToVertex(vertex);
-        return (index >= 0 ? edges.get(getIndexOfClosestEdgeToVertex(vertex)) : null);
+        return (index >= 0 ? edges.get(index) : null);
     }
 
     public ArrayList<Edge> getCarrotPathFrom(Vertex vertex, double lookAheadDistance) {
@@ -123,7 +121,6 @@ public class Path {
 
     public void clear() {
         edges.clear();
-        pathStart = null;
         lastAddedVertex = null;
     }
 
@@ -132,6 +129,19 @@ public class Path {
     }
 
     public Vertex getStart() {
-        return pathStart;
+        if(edges.size() > 0) {
+            return edges.get(0).start;
+        } else {
+            return null;
+        }
+    }
+
+    public Vertex getEnd() {
+        if(edges.size() > 0) {
+
+            return edges.get(edges.size() - 1).end;
+        } else {
+            return null;
+        }
     }
 }

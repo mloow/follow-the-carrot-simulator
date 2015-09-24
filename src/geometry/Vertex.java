@@ -1,5 +1,7 @@
 package geometry;
 
+import graphing.Point;
+
 /**
  * Created by marcus on 2015-09-18.
  */
@@ -47,5 +49,10 @@ public class Vertex {
 
     public Vertex concat(Vertex vertex) {
         return new Vertex(x + vertex.x, y + vertex.y);
+    }
+
+    public static Vertex fromPoint(Point point) {
+
+        return new Vertex(point.getX(), point.getY());
     }
 }

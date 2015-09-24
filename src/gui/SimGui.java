@@ -24,12 +24,15 @@ public class SimGui {
 
     public SimGui() {
 
-        fieldPanel.addMouseListener(new FieldMouseListener(fieldPanel));
-        fieldPanel.addMouseMotionListener(new FieldMouseListener(fieldPanel));
+        FieldMouseListener allInOneMouseListener = new FieldMouseListener(fieldPanel);
+
+        fieldPanel.addMouseListener(allInOneMouseListener);
+        fieldPanel.addMouseMotionListener(allInOneMouseListener);
+        fieldPanel.addMouseWheelListener(allInOneMouseListener);
         clearPathButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.getField().clear();
+                fieldPanel.getField().getPath().clear();
                 fieldPanel.repaint();
             }
         });
