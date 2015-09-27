@@ -46,7 +46,6 @@ public class TriangleTest {
     @Test
     public void shouldReturnCorrectEdgesOnGetSegmentsFromVertex() throws Exception {
 
-
         Edge e1 = new Edge(v3, v2);
         Edge e2 = new Edge(v2, v1);
 
@@ -55,21 +54,11 @@ public class TriangleTest {
         assertTrue(list.contains(e1) && list.contains(e2));
 
     }
-
-    @Test(expected = Exception.class)
-    public void shouldThrowExceptionOnGetAdjacentEdgesWhenNotContainsVertex() throws Exception {
-        triangle.getAdjacentEdges(new Vertex(123, 24));
-    }
     
     @Test
     public void shouldReturnCorrectEdgeOnGetOpposingEdges() throws Exception {
         Edge edge = new Edge(v2, v3);
         assertEquals(edge, triangle.getOpposingEdge(v1));
-    }
-
-    @Test(expected = Exception.class)
-    public void shouldThrowExceptionOnGetOpposingEdgeWhenNotContainsVertex() throws Exception {
-        triangle.getOpposingEdge(new Vertex(12, 44));
     }
 
     @Test

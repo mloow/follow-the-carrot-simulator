@@ -19,13 +19,13 @@ public class Triangle {
 
     }
 
-    public Edge[] getAdjacentEdges(Vertex v) throws Exception {
+    public Edge[] getAdjacentEdges(Vertex v) {
 
         if(contains(v)) {
             return new Edge[]{ a.contains(v) ? a : b, c.contains(v) ? c : b};
         }
 
-        throw new Exception("Triangle does not contain vertex " + v.toString());
+        return null;
     }
 
     public boolean contains(Vertex vertex) {
@@ -37,7 +37,7 @@ public class Triangle {
         return new Edge[]{a, b, c};
     }
 
-    public double getAngleInVertex(Vertex vertex) throws Exception {
+    public double getAngleInVertex(Vertex vertex) {
 
         if(contains(vertex)) {
 
@@ -52,19 +52,17 @@ public class Triangle {
 
             return Math.toDegrees(Math.acos(cosine));
         }
-
-        throw new Exception("Triangle does not contain vertex " + vertex.toString());
+        return Double.NaN;
     }
 
-    public double getAngleInVertex(Vertex vertex, double roundedToNearest) throws Exception {
+    public double getAngleInVertex(Vertex vertex, double roundedToNearest) {
         return Math.round(getAngleInVertex(vertex) * (1/roundedToNearest)) / (1/roundedToNearest);
     }
 
-    public Edge getOpposingEdge(Vertex vertex) throws Exception {
+    public Edge getOpposingEdge(Vertex vertex) {
         if(contains(vertex)) {
             return a.contains(vertex) ? (b.contains(vertex) ? c : b) : a;
         }
-
-        throw new Exception("Triangle does not contain vertex " + vertex.toString());
+        return null;
     }
 }

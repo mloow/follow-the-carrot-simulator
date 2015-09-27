@@ -10,6 +10,7 @@ public class Robot extends Mover2D {
 
     public static final double DEFAULT_LOOK_AHEAD_DISTANCE = 50.0;
     private double lookAheadDistance;
+    private Point carrotPoint;
 
     public Robot(double lookAheadDistance) {
         super();
@@ -20,14 +21,30 @@ public class Robot extends Mover2D {
     }
 
     public void turn(double rad) {
-        Vector orientation = getVelocity();
 
-        double x = orientation.getX() * Math.cos(rad) - orientation.getY() * Math.sin(rad);
-        double y = orientation.getX() * Math.sin(rad) + orientation.getY() * Math.cos(rad);
-
-        setVelocity(x, y);
+        setVelocity(getVelocity().turn(rad));
 
     }
 
+    public void setCarrotPoint(Point carrotPoint) {
 
+        this.carrotPoint = carrotPoint;
+
+    }
+
+    public double getSteeringAngle() {
+
+        double angle1 = getOrientation();
+        double angle2 = new Point(0, 0).getAngleTo(carrotPoint);
+        return angle1 - angle2;
+
+    }
+
+    public double getLookAheadDistance() {
+        return lookAheadDistance;
+    }
+
+    public void setLookAheadDistance(double lookAheadDistance) {
+        this.lookAheadDistance = lookAheadDistance;
+    }
 }

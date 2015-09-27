@@ -51,7 +51,7 @@ public class Mover2D {
 
 
     public double getOrientation() {
-        return (new Point(0, 0)).angleTo(new Point(velocity.getX(), velocity.getY()));
+        return (new Point(0, 0)).getAngleTo(new Point(velocity.getX(), velocity.getY()));
     }
 
     public Vector getVelocity() {
@@ -75,6 +75,11 @@ public class Mover2D {
         velocity = new Vector(x, y);
 
     }
+
+    public void setVelocity(Vector velocity) {
+        setVelocity(velocity.getX(), velocity.getY());
+    }
+
 
 
     public void setMaxSpeed(double maxSpeed) {

@@ -2,12 +2,13 @@ package test;
 
 import geometry.Vertex;
 import geometry.Edge;
+import graphing.Point;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by marcus on 2015-09-18.
+ * Created by Marcus on 2015-09-18.
  */
 public class EdgeTest {
 
@@ -35,7 +36,7 @@ public class EdgeTest {
 
     @Test
     public void shouldReturnTrueFromEqualsWhenEqualEdge() throws Exception {
-        assertTrue(e1.equals(e1));
+        assertTrue(e1.equals(new Edge(new Vertex(0, 0), new Vertex(2, 0))));
     }
 
     @Test
@@ -49,27 +50,27 @@ public class EdgeTest {
     }
 
     @Test
-    public void shouldReturnCorrectVertexFromGetClosestVertexOnEdge() throws Exception {
+    public void shouldReturnCorrectPointFromGetClosestPointTo() throws Exception {
 
         Vertex start = new Vertex(-1, 0);
         Vertex end = new Vertex(1, 0);
-        Vertex vertex = new Vertex(-1, -1);
+        Point point = new Point(-1, -1);
 
         Edge edge = new Edge(start, end);
 
-        assertEquals(new Vertex(-1, 0), edge.getClosestVertexOnEdge(vertex));
+        assertEquals(new Point(-1, 0), edge.getClosestPointTo(point));
     }
 
     @Test
-    public void shouldReturnCorrectVertexFromGetVertexOnEdgeAtDistance() throws Exception {
+    public void shouldReturnCorrectPointFromGetPointAlongEdgeAtDistance() throws Exception {
 
         Vertex start = new Vertex(-1, -1);
         Vertex end = new Vertex(5, 7);
         Edge e = new Edge(start, end);
 
-        Vertex expected = new Vertex(2, 3);
+        Point expected = new Point(2, 3);
 
-        Vertex actual = e.getVertexAlongEdgeAtDistance(5);
+        Point actual = e.getPointAlongEdgeAtDistance(5);
 
         assertEquals(expected, actual);
     }

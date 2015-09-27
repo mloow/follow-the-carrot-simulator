@@ -52,17 +52,11 @@
               <text value="Clear Path"/>
             </properties>
           </component>
-          <component id="f9fdd" class="javax.swing.JCheckBox" binding="drawTriangleCheckBox" default-binding="true">
-            <constraints/>
-            <properties>
-              <text value="Draw triangle"/>
-            </properties>
-          </component>
           <component id="f3106" class="javax.swing.JCheckBox" binding="drawClosestLineCheckBox" default-binding="true">
             <constraints/>
             <properties>
               <enabled value="true"/>
-              <selected value="false"/>
+              <selected value="true"/>
               <text value="Draw closest line"/>
             </properties>
           </component>
@@ -76,13 +70,8 @@
           <component id="f3e17" class="javax.swing.JCheckBox" binding="drawCarrotPathCheckBox" default-binding="true">
             <constraints/>
             <properties>
+              <selected value="true"/>
               <text value="Draw carrot path"/>
-            </properties>
-          </component>
-          <component id="eece" class="javax.swing.JCheckBox" binding="showCarrotPointCoordsCheckBox" default-binding="true">
-            <constraints/>
-            <properties>
-              <text value="Show carrot point coords"/>
             </properties>
           </component>
         </children>

@@ -15,6 +15,11 @@ public class Vertex {
         this.y = y;
     }
 
+    public Vertex(Point point) {
+        x = point.getX();
+        y = point.getY();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Vertex) {
@@ -33,26 +38,7 @@ public class Vertex {
         return Math.hypot(x - v.x, y- v.y);
     }
 
-    public Vertex differenceTo(Vertex vertex) {
-        return new Vertex(x - vertex.x, y - vertex.y);
-    }
-
-
-    public double dotProduct(Vertex vertex) {
-        return x*vertex.x + y*vertex.y;
-    }
-
-
-    public Vertex scale(double scalar) {
-        return new Vertex(x*scalar, y*scalar);
-    }
-
-    public Vertex concat(Vertex vertex) {
-        return new Vertex(x + vertex.x, y + vertex.y);
-    }
-
-    public static Vertex fromPoint(Point point) {
-
-        return new Vertex(point.getX(), point.getY());
+    public Point toPoint() {
+        return new Point(x, y);
     }
 }

@@ -18,13 +18,10 @@ public class FieldPanel extends JPanel {
 
     private static final int POINT_RADIUS = 4;
     private final Field field;
-    private boolean drawTriangleEnabled = false;
     private boolean drawPathEnabled = true;
-    private boolean drawClosestLineEnabled = false;
-    private boolean drawCarrotPathEnabled = false;
-    private boolean drawCarrotPointEnabled = false;
-    private double lookAheadDistance = 100;
-    private boolean drawRobotEnabled;
+    private boolean drawClosestLineEnabled = true;
+    private boolean drawCarrotPathEnabled = true;
+    private boolean drawRobotEnabled = false;
 
     public FieldPanel() {
         super();
@@ -41,11 +38,8 @@ public class FieldPanel extends JPanel {
 
         drawBackground(graphics);
 
-        if(drawRobotEnabled) {
-            drawRobot(graphics);
-        }
 
-        if(drawTriangleEnabled || drawClosestLineEnabled) {
+        if(drawClosestLineEnabled) {
             drawClosestLine(graphics);
         }
 
@@ -53,8 +47,12 @@ public class FieldPanel extends JPanel {
             drawPath(graphics);
         }
 
-        if(drawCarrotPathEnabled || drawCarrotPointEnabled) {
+        if(drawCarrotPathEnabled) {
             drawCarrotPath(graphics);
+        }
+
+        if(drawRobotEnabled) {
+            drawRobot(graphics);
         }
     }
 
@@ -65,13 +63,13 @@ public class FieldPanel extends JPanel {
             int y1 = (int) robotPos.getY();
             drawPoint(x1, y1, Color.pink, graphics);
 
-            Vector orientation = field.getRobot().getVelocity().normalize().scale(2).scale(10);
+            Vector orientation = field.getRobot().getVelocity().normalize().scale(20);
 
 
             int x2 = (int) (x1 + orientation.getX());
             int y2 = (int) (y1 + orientation.getY());
 
-
+            ((Graphics2D) graphics).setStroke(new BasicStroke(2));
             graphics.drawLine(x1, y1, x2, y2);
         }
     }
@@ -82,31 +80,32 @@ public class FieldPanel extends JPanel {
         g2d.setColor(new Color(255, 128, 0));
         g2d.setStroke(new BasicStroke(3));
 
-        Vertex robotPos = Vertex.fromPoint(field.getRobot().getPosition());
+        Point robotPos = field.getRobot().getPosition();
 
-        ArrayList<Edge> carrotPath = field.getPath().getCarrotPathFrom(robotPos, lookAheadDistance);
+        ArrayList<Edge> carrotPath = field.getPath().getCarrotPathFrom(robotPos, field.getRobot().getLookAheadDistance());
 
-        if(drawCarrotPathEnabled) {
-            for(Edge e : carrotPath) {
-                g2d.draw(new Line2D.Float((int) e.start.x, (int) e.start.y, (int) e.end.x, (int) e.end.y));
-            }
+        for(Edge e : carrotPath) {
+            g2d.draw(new Line2D.Float((int) e.start.x, (int) e.start.y, (int) e.end.x, (int) e.end.y));
         }
 
         if(!carrotPath.isEmpty())
         {
-            Vertex carrotPoint = carrotPath.get(carrotPath.size()-1).end;
-            drawPoint((int) carrotPoint.x, (int) carrotPoint.y, new Color(255, 128, 0), graphics);
-            if(drawCarrotPointEnabled) {
-                drawCarrotPointCoordinates(carrotPoint, graphics);
-            }
+            Point carrotPoint = carrotPath.get(carrotPath.size()-1).end.toPoint();
+            drawPoint((int) carrotPoint.getX(), (int) carrotPoint.getY(), new Color(255, 128, 0), graphics);
+            drawCarrotPointCoordinates(carrotPoint, graphics);
+            g2d.setStroke(new BasicStroke(1));
+            g2d.drawLine((int) robotPos.getX(), (int) robotPos.getY(), (int) carrotPoint.getX(), (int) carrotPoint.getY());
+            field.getRobot().setCarrotPoint(carrotPoint);
         }
+
+
     }
 
-    private void drawCarrotPointCoordinates(Vertex carrotPoint, Graphics graphics) {
+    private void drawCarrotPointCoordinates(Point carrotPoint, Graphics graphics) {
 
-        String s = String.format("(%.1f, %.1f)", carrotPoint.x, carrotPoint.y);
+        String s = String.format("(%.1f, %.1f)", carrotPoint.getX(), carrotPoint.getY());
 
-        graphics.drawString(s, (int) carrotPoint.x + 25, (int) carrotPoint.y + 25);
+        graphics.drawString(s, (int) carrotPoint.getX() + 25, (int) carrotPoint.getY() + 25);
     }
 
     private void drawBackground(Graphics graphics) {
@@ -139,24 +138,15 @@ public class FieldPanel extends JPanel {
     }
 
     private void drawClosestLine(Graphics graphics) {
-        Vertex robotPos = Vertex.fromPoint(field.getRobot().getPosition());
+        Point robotPos = field.getRobot().getPosition();
         if(robotPos != null) {
-            Edge e = field.getPath().getClosestEdgeToVertex(robotPos);
+            Edge e = field.getPath().getClosestEdgeTo(robotPos);
             if(e != null) {
 
-                Vertex closest = e.getClosestVertexOnEdge(robotPos);
+                Point closest = e.getClosestPointTo(robotPos);
 
-                if(drawTriangleEnabled) {
-
-                    graphics.setColor(new Color(64, 64, 64));
-                    graphics.drawLine((int) robotPos.x, (int) robotPos.y, (int) e.start.x, (int) e.start.y);
-                    graphics.drawLine((int) robotPos.x, (int) robotPos.y, (int) e.end.x, (int) e.end.y);
-                }
-
-                if(drawClosestLineEnabled) {
-                    graphics.setColor(new Color(128, 128, 128));
-                    graphics.drawLine((int) robotPos.x, (int) robotPos.y, (int) closest.x, (int) closest.y);
-                }
+                graphics.setColor(new Color(128, 128, 128));
+                graphics.drawLine((int) robotPos.getX(), (int) robotPos.getY(), (int) closest.getX(), (int) closest.getY());
             }
 
         }
@@ -172,10 +162,6 @@ public class FieldPanel extends JPanel {
         return field;
     }
 
-    public void setDrawTriangleEnabled(boolean drawTriangleEnabled) {
-        this.drawTriangleEnabled = drawTriangleEnabled;
-    }
-
     public void setDrawPathEnabled(boolean drawPathEnabled) {
         this.drawPathEnabled = drawPathEnabled;
     }
@@ -184,18 +170,9 @@ public class FieldPanel extends JPanel {
         this.drawClosestLineEnabled = drawClosestLineEnabled;
     }
 
-    public void setLookAheadDistance(double lookAheadDistance) {
-        this.lookAheadDistance = lookAheadDistance;
-    }
-
     public void setDrawCarrotPathEnabled(boolean drawCarrotPathEnabled) {
         this.drawCarrotPathEnabled = drawCarrotPathEnabled;
     }
-
-    public void setDrawCarrotPointEnabled(boolean drawCarrotPointEnabled) {
-        this.drawCarrotPointEnabled = drawCarrotPointEnabled;
-    }
-
 
     public void setDrawRobotEnabled(boolean drawRobotEnabled) {
         this.drawRobotEnabled = drawRobotEnabled;

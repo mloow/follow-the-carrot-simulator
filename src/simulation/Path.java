@@ -2,6 +2,7 @@ package simulation;
 
 import geometry.Edge;
 import geometry.Vertex;
+import graphing.Point;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -15,7 +16,7 @@ public class Path {
     private Vertex lastAddedVertex = null;
 
     public Path() {
-        edges = new CopyOnWriteArrayList<Edge>();
+        edges = new CopyOnWriteArrayList<>();
     }
 
     public Vertex getLastAddedVertex() {
@@ -32,17 +33,17 @@ public class Path {
         }
     }
 
-    private int getIndexOfClosestEdgeToVertex(Vertex vertex) {
+    private int getIndexOfClosestEdgeTo(Point point) {
         if(!edges.isEmpty()) {
 
-            Vertex closestVertexOnEdge = edges.get(0).getClosestVertexOnEdge(vertex);
-            double minD = vertex.distanceTo(closestVertexOnEdge);
+            Point closestPointOnEdge = edges.get(0).getClosestPointTo(point);
+            double minD = point.getDistanceTo(closestPointOnEdge);
             int index = 0;
 
             for(int i = 0; i < edges.size(); i++) {
 
-                closestVertexOnEdge = edges.get(i).getClosestVertexOnEdge(vertex);
-                double d    = vertex.distanceTo(closestVertexOnEdge);
+                closestPointOnEdge = edges.get(i).getClosestPointTo(point);
+                double d    = point.getDistanceTo(closestPointOnEdge);
                 minD        = (d <= minD ? d : minD);
                 index       = (d <= minD ? i : index);
 
@@ -54,39 +55,39 @@ public class Path {
         return -1;
     }
 
-    public Edge getClosestEdgeToVertex(Vertex vertex) {
-        int index = getIndexOfClosestEdgeToVertex(vertex);
+    public Edge getClosestEdgeTo(Point point) {
+        int index = getIndexOfClosestEdgeTo(point);
         return (index >= 0 ? edges.get(index) : null);
     }
 
-    public ArrayList<Edge> getCarrotPathFrom(Vertex vertex, double lookAheadDistance) {
-        ArrayList<Edge> carrotPath = new ArrayList<Edge>();
+    public ArrayList<Edge> getCarrotPathFrom(Point point, double lookAheadDistance) {
+        ArrayList<Edge> carrotPath = new ArrayList<>();
 
-        int indexOfStartEdge = getIndexOfClosestEdgeToVertex(vertex);
+        int indexOfStartEdge = getIndexOfClosestEdgeTo(point);
         if(indexOfStartEdge < 0) {
             return carrotPath;
         }
         Edge startEdge = edges.get(indexOfStartEdge);
-        Vertex start = startEdge.getClosestVertexOnEdge(vertex);
+        Point start = startEdge.getClosestPointTo(point);
 
         double remainingDistance = lookAheadDistance;
 
         // Loop until remaining distance is 0 (carrot point has been reached) or until the end of the path has been reached
         for(int i = indexOfStartEdge; i < edges.size() && remainingDistance > 0; i++) {
 
-            Edge currentEdge = i == indexOfStartEdge ? new Edge(start, startEdge.end) : edges.get(i);
-            Vertex end = currentEdge.getVertexAlongEdgeAtDistance(remainingDistance);
+            Edge currentEdge = i == indexOfStartEdge ? new Edge(new Vertex(start), startEdge.end) : edges.get(i);
+            Point end = currentEdge.getPointAlongEdgeAtDistance(remainingDistance);
 
             // If the distance to the supposed end-point from the current start point exceeds the current edges end point
-            if(start.distanceTo(end) > start.distanceTo(currentEdge.end)) {
-                end = currentEdge.end;
+            if(start.getDistanceTo(end) > start.getDistanceTo(currentEdge.end.toPoint())) {
+                end = currentEdge.end.toPoint();
 
                 // if the current edge is the last one, we have arrived
                 if(i == edges.size() - 1) { // if last edge of path
                     remainingDistance = 0;
                     // else subtract the distance from the current start point to the end of the current edge
                 } else {
-                    remainingDistance-= start.distanceTo(end);
+                    remainingDistance-= start.getDistanceTo(end);
 
                 }
                 // else we have arrived
@@ -97,27 +98,13 @@ public class Path {
             }
 
             // Add the edge to the carrotPath
-            carrotPath.add(new Edge(start, end));
+            carrotPath.add(new Edge(new Vertex(start), new Vertex(end)));
 
-            start = currentEdge.end;
-
+            start = currentEdge.end.toPoint();
         }
 
         return carrotPath;
-
-
     }
-
-    public String[] getPathAsStringArray() {
-        String[] strings = new String[edges.size()];
-
-        for (int i = 0; i < edges.size(); i++) {
-            strings[i] = edges.get(i).toString();
-        }
-
-        return strings;
-    }
-
 
     public void clear() {
         edges.clear();
@@ -132,7 +119,7 @@ public class Path {
         if(edges.size() > 0) {
             return edges.get(0).start;
         } else {
-            return null;
+            return lastAddedVertex;
         }
     }
 

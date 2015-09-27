@@ -1,5 +1,8 @@
 package geometry;
 
+import graphing.Point;
+import graphing.Vector;
+
 /**
  * Created by marcus on 2015-09-18.
  */
@@ -37,15 +40,16 @@ public class Edge {
         return "[" + start.toString() + ", " + end.toString() + "]";
     }
 
-    public Vertex getClosestVertexOnEdge(Vertex vertex) {
+    public Point getClosestPointTo(Point point) {
 
         if(start.equals(end)) {
-            return start;
+            return start.toPoint();
         }
-        Vertex closest;
+        Vertex vertex = new Vertex(point.getX(), point.getY());
+        Point closest;
         Triangle triangle = new Triangle(start, end, vertex);
-        Vertex v = end.differenceTo(start);
-        Vertex w = vertex.differenceTo(start);
+        Vector v = new Vector(start.toPoint(), end.toPoint());
+        Vector w = new Vector(start.toPoint(), point);
 
         double c1 = w.dotProduct(v);
         double c2 = v.dotProduct(v);
@@ -55,38 +59,33 @@ public class Edge {
         double angleInEnd;
 
 
-        try {
-            angleInStart = triangle.getAngleInVertex(start, Triangle.SUGGESTED_ERROR);
-            angleInEnd = triangle.getAngleInVertex(end, Triangle.SUGGESTED_ERROR);
-        } catch (Exception e) {
-            angleInStart = 0;
-            angleInEnd = 0;
-        }
-
+        angleInStart = triangle.getAngleInVertex(start, Triangle.SUGGESTED_ERROR);
+        angleInEnd = triangle.getAngleInVertex(end, Triangle.SUGGESTED_ERROR);
 
         if (angleInStart >= 90) {
-            closest = start;
+            closest = start.toPoint();
         } else if (angleInEnd >= 90) {
-            closest = end;
+            closest = end.toPoint();
         } else if (angleInStart == 0 && angleInEnd == 0) {
 
             if(c1 < 0) {
-                closest = start;
+                closest = start.toPoint();
             } else {
-                closest = end;
+                closest = end.toPoint();
             }
 
         } else {
-            closest = start.concat(v.scale(b));
+            Point pB = v.scale(b).pointsTo();
+            closest = new Point(start.toPoint().getX() + pB.getX(), start.toPoint().getY() + pB.getY());
         }
 
         return closest;
     }
 
-    public Vertex getVertexAlongEdgeAtDistance(double distance) {
+    public Point getPointAlongEdgeAtDistance(double distance) {
 
         if(start.equals(end)) {
-            return end;
+            return end.toPoint();
         }
 
         double ratio = distance / getLength();
@@ -94,7 +93,7 @@ public class Edge {
         double x = ratio * (end.x - start.x);
         double y = ratio * (end.y - start.y);
 
-        return start.concat(new Vertex(x, y));
+        return new Point(start.x + x, start.y + y);
 
     }
 }

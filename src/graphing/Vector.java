@@ -13,6 +13,11 @@ public class Vector {
         this.y = y;
     }
 
+    public Vector(Point point1, Point point2) {
+        x = point2.getX() - point1.getX();
+        y = point2.getY() - point1.getY();
+    }
+
     public double getX() {
         return x;
     }
@@ -37,8 +42,21 @@ public class Vector {
         return x*vector.x + y*vector.y;
     }
 
+    public Vector turn(double rad) {
+
+        double tX = x * Math.cos(rad) - y * Math.sin(rad);
+        double tY = x * Math.sin(rad) + y * Math.cos(rad);
+
+        return new Vector(tX, tY);
+
+    }
+
     @Override
     public String toString() {
         return String.format("(%f, %f)", x, y);
+    }
+
+    public Point pointsTo() {
+        return new Point(x, y);
     }
 }

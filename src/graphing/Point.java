@@ -31,7 +31,7 @@ public class Point {
     }
 
 
-    public double distanceTo(Point point) {
+    public double getDistanceTo(Point point) {
         return Math.hypot(x - point.x, y- point.y);
     }
 
@@ -40,7 +40,17 @@ public class Point {
         return String.format("(%f, %f)", x, y);
     }
 
-    public double angleTo(Point point) {
+    public double getAngleTo(Point point) {
         return Math.atan2(point.y - y, point.x - x);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Point) {
+            return (((Point) obj).x == x && ((Point) obj).y == y);
+        } else {
+            return false;
+        }
+    }
+
 }

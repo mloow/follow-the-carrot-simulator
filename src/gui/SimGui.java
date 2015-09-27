@@ -15,12 +15,10 @@ public class SimGui {
     private JPanel panel;
     private FieldPanel fieldPanel;
     private JButton clearPathButton;
-    private JCheckBox drawTriangleCheckBox;
     private JCheckBox drawClosestLineCheckBox;
     private JCheckBox drawPathCheckBox;
     private JSlider carrotLengthSlider;
     private JCheckBox drawCarrotPathCheckBox;
-    private JCheckBox showCarrotPointCoordsCheckBox;
 
     public SimGui() {
 
@@ -41,20 +39,14 @@ public class SimGui {
         carrotLengthSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
-                fieldPanel.setLookAheadDistance(carrotLengthSlider.getValue());
+                fieldPanel.getField().getRobot().setLookAheadDistance(carrotLengthSlider.getValue());
                 fieldPanel.repaint();
             }
         });
     }
 
     private void addCheckboxListeners() {
-        drawTriangleCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawTriangleEnabled(drawTriangleCheckBox.isSelected());
-                fieldPanel.repaint();
-            }
-        });
+
         drawClosestLineCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -73,14 +65,6 @@ public class SimGui {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 fieldPanel.setDrawCarrotPathEnabled(drawCarrotPathCheckBox.isSelected());
-                fieldPanel.repaint();
-            }
-        });
-
-        showCarrotPointCoordsCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawCarrotPointEnabled(showCarrotPointCoordsCheckBox.isSelected());
                 fieldPanel.repaint();
             }
         });
