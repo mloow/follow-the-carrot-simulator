@@ -26,6 +26,12 @@
         <properties/>
         <border type="none"/>
         <children>
+          <component id="c9260" class="javax.swing.JButton" binding="runButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Run"/>
+            </properties>
+          </component>
           <component id="273c4" class="javax.swing.JLabel">
             <constraints/>
             <properties>

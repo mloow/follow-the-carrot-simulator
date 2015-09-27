@@ -22,19 +22,51 @@ public class FieldPanel extends JPanel {
     private boolean drawClosestLineEnabled = true;
     private boolean drawCarrotPathEnabled = true;
     private boolean drawRobotEnabled = false;
+    private ArrayList<Edge> carrotPath;
+    private Point carrotPoint;
+    private boolean running;
 
     public FieldPanel() {
         super();
         this.field = new Field();
+        updateCarrotPath();
     }
 
     public boolean isDrawPathEnabled() {
         return drawPathEnabled;
     }
 
+    public void run() {
+
+        running = true;
+        while(running && !field.getRobot().isAt(field.getPath().getEnd().toPoint())) {
+
+            updateCarrotPath();
+            field.getRobot().moveFor(0.03);
+            repaint();
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void updateCarrotPath() {
+        try {
+            carrotPath = field.getPath().getCarrotPathFrom(field.getRobot().getPosition(), field.getRobot().getLookAheadDistance());
+            carrotPoint = carrotPath.get(carrotPath.size() - 1).end.toPoint();
+            field.getRobot().setCarrotPoint(carrotPoint);
+        } catch (Exception e) {
+            // no path
+        }
+    }
+
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
+
+
 
         drawBackground(graphics);
 
@@ -71,6 +103,9 @@ public class FieldPanel extends JPanel {
 
             ((Graphics2D) graphics).setStroke(new BasicStroke(2));
             graphics.drawLine(x1, y1, x2, y2);
+            double steeringAngle = Math.toDegrees(field.getRobot().getSteeringAngle());
+            String s = String.format("%.1f\u00B0", steeringAngle);
+            graphics.drawString(s, (int) robotPos.getX() + 15, (int) robotPos.getY() - 15);
         }
     }
 
@@ -82,20 +117,17 @@ public class FieldPanel extends JPanel {
 
         Point robotPos = field.getRobot().getPosition();
 
-        ArrayList<Edge> carrotPath = field.getPath().getCarrotPathFrom(robotPos, field.getRobot().getLookAheadDistance());
 
         for(Edge e : carrotPath) {
             g2d.draw(new Line2D.Float((int) e.start.x, (int) e.start.y, (int) e.end.x, (int) e.end.y));
         }
 
-        if(!carrotPath.isEmpty())
+        if (!carrotPath.isEmpty())
         {
-            Point carrotPoint = carrotPath.get(carrotPath.size()-1).end.toPoint();
             drawPoint((int) carrotPoint.getX(), (int) carrotPoint.getY(), new Color(255, 128, 0), graphics);
             drawCarrotPointCoordinates(carrotPoint, graphics);
             g2d.setStroke(new BasicStroke(1));
             g2d.drawLine((int) robotPos.getX(), (int) robotPos.getY(), (int) carrotPoint.getX(), (int) carrotPoint.getY());
-            field.getRobot().setCarrotPoint(carrotPoint);
         }
 
 
@@ -105,7 +137,7 @@ public class FieldPanel extends JPanel {
 
         String s = String.format("(%.1f, %.1f)", carrotPoint.getX(), carrotPoint.getY());
 
-        graphics.drawString(s, (int) carrotPoint.getX() + 25, (int) carrotPoint.getY() + 25);
+        graphics.drawString(s, (int) carrotPoint.getX() + 25, (int) carrotPoint.getY() - 25);
     }
 
     private void drawBackground(Graphics graphics) {
@@ -176,5 +208,10 @@ public class FieldPanel extends JPanel {
 
     public void setDrawRobotEnabled(boolean drawRobotEnabled) {
         this.drawRobotEnabled = drawRobotEnabled;
+    }
+
+
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 }

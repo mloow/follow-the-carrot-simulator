@@ -19,6 +19,8 @@ public class SimGui {
     private JCheckBox drawPathCheckBox;
     private JSlider carrotLengthSlider;
     private JCheckBox drawCarrotPathCheckBox;
+    private JButton runButton;
+    private Thread simulationThread;
 
     public SimGui() {
 
@@ -40,7 +42,26 @@ public class SimGui {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
                 fieldPanel.getField().getRobot().setLookAheadDistance(carrotLengthSlider.getValue());
+                fieldPanel.updateCarrotPath();
                 fieldPanel.repaint();
+            }
+        });
+        runButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                if(runButton.getText().equals("Run")) {
+                    simulationThread = new Thread(() -> {
+                        runButton.setText("Stop");
+                        fieldPanel.run();
+                        runButton.setText("Run");
+                    });
+                    simulationThread.start();
+                } else {
+                    fieldPanel.setRunning(false);
+                    runButton.setText("Run");
+                }
+
             }
         });
     }

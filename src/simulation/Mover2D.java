@@ -30,7 +30,6 @@ public class Mover2D {
 
     public void tick() {
 
-
         double vX = velocity.getX() + accelleration.getX() * TICK_PERIOD;
         double vY = velocity.getY() + accelleration.getY() * TICK_PERIOD;
 
@@ -48,7 +47,6 @@ public class Mover2D {
         position.setY(position.getY() + vY * TICK_PERIOD);
 
     }
-
 
     public double getOrientation() {
         return (new Point(0, 0)).getAngleTo(new Point(velocity.getX(), velocity.getY()));

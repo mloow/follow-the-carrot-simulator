@@ -89,6 +89,8 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener, M
 
             field.getRobot().setPosition(mousePos);
 
+            fieldPanel.updateCarrotPath();
+
             fieldPanel.repaint();
 
             fieldPanel.setDrawPathEnabled(oldDrawPath);
