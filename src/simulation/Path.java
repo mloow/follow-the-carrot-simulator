@@ -4,7 +4,6 @@ import geometry.Edge;
 import geometry.Vertex;
 import graphing.Point;
 
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -23,13 +22,13 @@ public class Path {
         return lastAddedVertex;
     }
 
-    public void concatPath(Vertex vertex) {
+    public void concat(Vertex vertex) {
 
         if(lastAddedVertex == null) {
             lastAddedVertex = vertex;
         } else {
             edges.add(new Edge(lastAddedVertex, vertex));
-            lastAddedVertex =  vertex;
+            lastAddedVertex = vertex;
         }
     }
 
@@ -60,22 +59,27 @@ public class Path {
         return (index >= 0 ? edges.get(index) : null);
     }
 
-    public ArrayList<Edge> getCarrotPathFrom(Point point, double lookAheadDistance) {
-        ArrayList<Edge> carrotPath = new ArrayList<>();
+    public Path getCarrotPathFrom(Point point, double lookAheadDistance) {
+        Path carrotPath = new Path();
 
         int indexOfStartEdge = getIndexOfClosestEdgeTo(point);
         if(indexOfStartEdge < 0) {
             return carrotPath;
         }
-        Edge startEdge = edges.get(indexOfStartEdge);
-        Point start = startEdge.getClosestPointTo(point);
 
+        Edge currentEdge = edges.get(indexOfStartEdge);
+        Point start = currentEdge.getClosestPointTo(point);
+        carrotPath.concat(new Vertex(start));
         double remainingDistance = lookAheadDistance;
+        currentEdge = new Edge(new Vertex(start), currentEdge.end);
 
         // Loop until remaining distance is 0 (carrot point has been reached) or until the end of the path has been reached
         for(int i = indexOfStartEdge; i < edges.size() && remainingDistance > 0; i++) {
 
-            Edge currentEdge = i == indexOfStartEdge ? new Edge(new Vertex(start), startEdge.end) : edges.get(i);
+            if(i != indexOfStartEdge) {
+
+                currentEdge = edges.get(i);
+            }
             Point end = currentEdge.getPointAlongEdgeAtDistance(remainingDistance);
 
             // If the distance to the supposed end-point from the current start point exceeds the current edges end point
@@ -83,27 +87,30 @@ public class Path {
                 end = currentEdge.end.toPoint();
 
                 // if the current edge is the last one, we have arrived
-                if(i == edges.size() - 1) { // if last edge of path
+                if(i == edges.size() - 1) {
                     remainingDistance = 0;
                     // else subtract the distance from the current start point to the end of the current edge
                 } else {
                     remainingDistance-= start.getDistanceTo(end);
-
                 }
-                // else we have arrived
+
+            // else we have arrived
             } else {
                 if(!start.equals(end)) {
                     remainingDistance = 0;
                 }
             }
 
-            // Add the edge to the carrotPath
-            carrotPath.add(new Edge(new Vertex(start), new Vertex(end)));
-
             start = currentEdge.end.toPoint();
+            carrotPath.concat(new Vertex(end));
         }
 
+
         return carrotPath;
+    }
+
+    public Point getCarrotPointFrom(Point point, double lookAheadDistance) {
+        return getCarrotPathFrom(point, lookAheadDistance).getEnd().toPoint();
     }
 
     public void clear() {
@@ -130,5 +137,14 @@ public class Path {
         } else {
             return null;
         }
+    }
+
+    public double getLength() {
+        double length = 0;
+        for(Edge e : edges) {
+            length += e.getLength();
+        }
+
+        return length;
     }
 }

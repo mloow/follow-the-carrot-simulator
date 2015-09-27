@@ -42,7 +42,7 @@ public class SimGui {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
                 fieldPanel.getField().getRobot().setLookAheadDistance(carrotLengthSlider.getValue());
-                fieldPanel.updateCarrotPath();
+                fieldPanel.updateCarrotPoint();
                 fieldPanel.repaint();
             }
         });
@@ -85,7 +85,7 @@ public class SimGui {
         drawCarrotPathCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fieldPanel.setDrawCarrotPathEnabled(drawCarrotPathCheckBox.isSelected());
+                fieldPanel.setDrawCarrotPointEnabled(drawCarrotPathCheckBox.isSelected());
                 fieldPanel.repaint();
             }
         });

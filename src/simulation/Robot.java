@@ -11,7 +11,6 @@ public class Robot extends Mover2D {
     public static final double DEFAULT_LOOK_AHEAD_DISTANCE = 50.0;
     private double lookAheadDistance;
     private Point carrotPoint;
-    private double angularSpeed;
 
     public Robot(double lookAheadDistance) {
         super();
@@ -41,10 +40,10 @@ public class Robot extends Mover2D {
         } else {
             double angle2 = getPosition().getAngleTo(carrotPoint);
             double error =  angle2 - angle1;
-            if(error > 180.0) {
-                return error - 360.0;
-            } else if (error < -180.0) {
-                return error + 360.0;
+            if(error > Math.PI / 2) {
+                return error - Math.PI;
+            } else if (error < -Math.PI / 2) {
+                return error + Math.PI;
             } else {
                 return error;
             }
@@ -65,9 +64,10 @@ public class Robot extends Mover2D {
     }
     public void moveFor(double seconds) {
         int ticks = (int) (seconds / Mover2D.TICK_PERIOD);
+        double steeringAngle = getSteeringAngle() ;
         for(int i = 0; i < ticks; i++) {
             tick();
-            turn(getSteeringAngle() * Mover2D.TICK_PERIOD);
+            turn(steeringAngle * Mover2D.TICK_PERIOD);
         }
     }
 

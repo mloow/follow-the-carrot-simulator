@@ -29,7 +29,7 @@ public class PathTest {
 
     @Test
     public void shouldReturnEmptyEdgesFromGetPathWhenConcatOnce() throws Exception {
-        path.concatPath(new Vertex(1, 10));
+        path.concat(new Vertex(1, 10));
         assertTrue(path.getEdges().isEmpty());
     }
 
@@ -39,9 +39,9 @@ public class PathTest {
         Vertex vertex1 = new Vertex(5, 10);
         Vertex vertex2 = new Vertex(6, 12);
         Vertex vertex3 = new Vertex(7, 14);
-        path.concatPath(vertex1);
-        path.concatPath(vertex2);
-        path.concatPath(vertex3);
+        path.concat(vertex1);
+        path.concat(vertex2);
+        path.concat(vertex3);
 
         CopyOnWriteArrayList<Edge> actualPath = path.getEdges();
         Edge[] expectedPath = new Edge[]{ new Edge(vertex1, vertex2), new Edge(vertex2, vertex3) };
@@ -57,9 +57,9 @@ public class PathTest {
         Vertex vertex1 = new Vertex(5, 10);
         Vertex vertex2 = new Vertex(6, 12);
         Vertex vertex3 = new Vertex(7, 14);
-        path.concatPath(vertex1);
-        path.concatPath(vertex2);
-        path.concatPath(vertex3);
+        path.concat(vertex1);
+        path.concat(vertex2);
+        path.concat(vertex3);
 
         path.clear();
 
@@ -68,9 +68,9 @@ public class PathTest {
 
     @Test
     public void shouldReturnEmptyPathAfterConcatClearConcat() throws Exception {
-        path.concatPath(new Vertex(1, 1));
+        path.concat(new Vertex(1, 1));
         path.clear();
-        path.concatPath(new Vertex(2, 3));
+        path.concat(new Vertex(2, 3));
         assertTrue(path.getEdges().isEmpty());
     }
 
@@ -80,9 +80,9 @@ public class PathTest {
         Vertex vertex1 = new Vertex(5, 10);
         Vertex vertex2 = new Vertex(6, 12);
         Vertex vertex3 = new Vertex(7, 14);
-        path.concatPath(vertex1);
-        path.concatPath(vertex2);
-        path.concatPath(vertex3);
+        path.concat(vertex1);
+        path.concat(vertex2);
+        path.concat(vertex3);
 
         path.clear();
 
@@ -92,9 +92,9 @@ public class PathTest {
     @Test
     public void shouldNotReturnNullFromLastAddedAfterConcatClearConcat() throws Exception {
 
-        path.concatPath(new Vertex(1, 1));
+        path.concat(new Vertex(1, 1));
         path.clear();
-        path.concatPath(new Vertex(2, 3));
+        path.concat(new Vertex(2, 3));
         assertNotNull(path.getLastAddedVertex());
     }
 

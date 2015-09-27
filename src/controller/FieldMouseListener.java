@@ -35,7 +35,7 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener, M
         if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
             Vertex mousePos = new Vertex(mouseEvent.getX(), mouseEvent.getY());
             if (!mousePos.equals(lastAdded)) {
-                field.getPath().concatPath(mousePos);
+                field.getPath().concat(mousePos);
                 fieldPanel.repaint();
                 lastAdded = mousePos;
             }
@@ -70,7 +70,7 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener, M
             if (lastAdded != null) {
 
                 if (lastAdded.distanceTo(mousePos) >= EDGE_LENGTH) {
-                    field.getPath().concatPath(mousePos);
+                    field.getPath().concat(mousePos);
                     fieldPanel.repaint();
                     lastAdded = mousePos;
                 }
@@ -89,7 +89,7 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener, M
 
             field.getRobot().setPosition(mousePos);
 
-            fieldPanel.updateCarrotPath();
+            fieldPanel.updateCarrotPoint();
 
             fieldPanel.repaint();
 

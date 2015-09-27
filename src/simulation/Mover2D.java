@@ -78,8 +78,6 @@ public class Mover2D {
         setVelocity(velocity.getX(), velocity.getY());
     }
 
-
-
     public void setMaxSpeed(double maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
