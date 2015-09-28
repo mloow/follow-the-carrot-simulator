@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FollowTheCarrotSim.iml" filepath="$PROJECT_DIR$/FollowTheCarrotSim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/follow-the-carrot-simulator.iml" filepath="$PROJECT_DIR$/follow-the-carrot-simulator.iml" />
     </modules>
   </component>
 </project>

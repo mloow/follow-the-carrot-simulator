@@ -147,4 +147,8 @@ public class Path {
 
         return length;
     }
+
+    public int getSize() {
+        return edges.size();
+    }
 }

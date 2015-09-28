@@ -41,7 +41,12 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener, M
             }
         } else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
             robotPosLocked = !robotPosLocked;
+            fieldPanel.setRunning(false);
             fieldPanel.setDrawRobotEnabled(robotPosLocked);
+            field.getRobot().setTrackPathEnabled(robotPosLocked);
+            if(robotPosLocked) {
+                field.getRobot().resetTraveledPath();
+            }
             field.getRobot().setPosition(new Point(mouseEvent.getX(), mouseEvent.getY()));
             fieldPanel.repaint();
         }
