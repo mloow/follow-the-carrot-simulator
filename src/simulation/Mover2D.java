@@ -7,36 +7,31 @@ public class Mover2D {
     public static final double TICK_PERIOD = 0.001;
 
     private Vector velocity;
-    private Vector accelleration;
+    private Vector acceleration;
     private Point position;
     private double maxSpeed;
-    private double angularVelocity;
 
 
     public Mover2D() {
 
         position = new Point(0, 0);
         velocity = new Vector(0, 0);
-        accelleration = new Vector(0, 0);
-        angularVelocity = 0.0;
+        acceleration = new Vector(0, 0);
         maxSpeed = 0;
     }
 
-    public Mover2D(Point position, Vector velocity, Vector accelleration, double maxSpeed) {
-        this.accelleration = accelleration;
+    public Mover2D(Point position, Vector velocity, Vector acceleration, double maxSpeed) {
+        this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.velocity = velocity;
         this.position = position;
-        angularVelocity = 0.0;
     }
 
 
     public void tick() {
 
-        //accelleration = accelleration.turn(angularVelocity * TICK_PERIOD);
-
-        double vX = velocity.getX() + accelleration.getX() * TICK_PERIOD;
-        double vY = velocity.getY() + accelleration.getY() * TICK_PERIOD;
+        double vX = velocity.getX() + acceleration.getX() * TICK_PERIOD;
+        double vY = velocity.getY() + acceleration.getY() * TICK_PERIOD;
 
         if(maxSpeed >= 0 &&Math.hypot(vX, vY) > maxSpeed) {
 
@@ -47,14 +42,14 @@ public class Mover2D {
         }
 
         velocity = new Vector(vX, vY);
-        //velocity = velocity.turn(angularVelocity * TICK_PERIOD);
-        position.setX(position.getX() + vX * TICK_PERIOD);
-        position.setY(position.getY() + vY * TICK_PERIOD);
+
+        position.setX(position.getX() + velocity.getX() * TICK_PERIOD);
+        position.setY(position.getY() + velocity.getY() * TICK_PERIOD);
 
     }
 
     public double getOrientation() {
-        return (new Point(0, 0)).getAngleTo(new Point(velocity.getX(), velocity.getY()));
+        return (new Point(0, 0)).getAngleTo(velocity.pointsTo());
     }
 
     public Vector getVelocity() {
@@ -83,20 +78,16 @@ public class Mover2D {
         setVelocity(velocity.getX(), velocity.getY());
     }
 
-    public void setAngularVelocity(double radPerSecond) {
-        this.angularVelocity = radPerSecond;
+    public void setAcceleration(Vector acceleration) {
+        this.acceleration = acceleration;
     }
 
-    public void setAccelleration(Vector accelleration) {
-        this.accelleration = accelleration;
+    public void setAcceleration(double x, double y) {
+        acceleration = new Vector(x, y);
     }
 
-    public void setAccelleration(double x, double y) {
-        accelleration = new Vector(x, y);
-    }
-
-    public Vector getAccelleration() {
-        return accelleration;
+    public Vector getAcceleration() {
+        return acceleration;
     }
 
     public void setMaxSpeed(double maxSpeed) {

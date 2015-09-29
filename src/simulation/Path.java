@@ -11,10 +11,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class Path {
 
+    public static final double DEFAULT_LOOK_AHEAD_DISTANCE = 50.0;
+
     private CopyOnWriteArrayList<Edge> edges;
     private Vertex lastAddedVertex = null;
+    private double lookAheadDistance;
 
     public Path() {
+        lookAheadDistance = DEFAULT_LOOK_AHEAD_DISTANCE;
         edges = new CopyOnWriteArrayList<>();
     }
 
@@ -59,7 +63,7 @@ public class Path {
         return (index >= 0 ? edges.get(index) : null);
     }
 
-    public Path getCarrotPathFrom(Point point, double lookAheadDistance) {
+    public Path getCarrotPathFrom(Point point) {
         Path carrotPath = new Path();
 
         int indexOfStartEdge = getIndexOfClosestEdgeTo(point);
@@ -109,8 +113,8 @@ public class Path {
         return carrotPath;
     }
 
-    public Point getCarrotPointFrom(Point point, double lookAheadDistance) {
-        return getCarrotPathFrom(point, lookAheadDistance).getEnd().toPoint();
+    public Point getCarrotPointFrom(Point point) {
+        return getCarrotPathFrom(point).getEnd().toPoint();
     }
 
     public void clear() {

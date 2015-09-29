@@ -2,6 +2,8 @@ package simulation;
 
 import geometry.Edge;
 import geometry.Vertex;
+import graphing.*;
+import graphing.Point;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,10 +16,14 @@ public class Field {
 
     private Path path;
     private Robot robot;
+    private Point carrotPoint;
 
-    public Field() {
+    public Field(Robot robot) {
         this.path = new Path();
-        this.robot = new Robot(Robot.DEFAULT_LOOK_AHEAD_DISTANCE);
+    }
+
+    public void setRobot(Robot robot) {
+        this.robot = robot;
     }
 
     public Path getPath() {
@@ -26,11 +32,31 @@ public class Field {
 
     public void clear() {
         path.clear();
-        robot = new Robot(Robot.DEFAULT_LOOK_AHEAD_DISTANCE);
+        robot = null;
+    }
+
+    public double getSteeringAngle() {
+        return 0;
     }
 
     public Robot getRobot() {
         return this.robot;
     }
 
+    public void updateCarrotPoint() {
+        try {
+            if(path.getEdges().size() > 1) {
+                carrotPoint = path.getCarrotPointFrom(robot.getPosition());
+            } else {
+                carrotPoint = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            carrotPoint = null;
+        }
+    }
+
+    public Point getCarrotPoint() {
+        return carrotPoint;
+    }
 }

@@ -35,6 +35,10 @@ public class Point {
         return Math.hypot(x - point.x, y- point.y);
     }
 
+    public boolean isWithinDistanceTo(double distance, Point point) {
+        return this.getDistanceTo(point) < distance;
+    }
+
     @Override
     public String toString() {
         return String.format("(%.1f, %.1f)", x, y);

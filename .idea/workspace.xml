@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7afc1a09-596f-4960-b7b3-a741bec2d209" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gui/StringDrawer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/follow-the-carrot-simulator.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/FieldMouseListener.java" afterPath="$PROJECT_DIR$/src/controller/FieldMouseListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/simulation/DifferentialDriveRobot.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simulation/Field.java" afterPath="$PROJECT_DIR$/src/simulation/Field.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/FieldPanel.java" afterPath="$PROJECT_DIR$/src/gui/FieldPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simulation/Mover2D.java" afterPath="$PROJECT_DIR$/src/simulation/Mover2D.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simulation/Path.java" afterPath="$PROJECT_DIR$/src/simulation/Path.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/graphing/Point.java" afterPath="$PROJECT_DIR$/src/graphing/Point.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simulation/Robot.java" afterPath="$PROJECT_DIR$/src/simulation/Robot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/graphing/Vector.java" afterPath="$PROJECT_DIR$/src/graphing/Vector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/follow-the-carrot-simulator.iml" afterPath="$PROJECT_DIR$/follow-the-carrot-simulator.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -39,24 +39,77 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Robot.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Robot.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/simulation/Robot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68204284">
-              <caret line="88" column="46" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1654#1655#0" expanded="true" />
-                <element signature="e#1694#1695#0" expanded="true" />
-                <element signature="e#1858#1859#0" expanded="true" />
-                <element signature="e#1921#1922#0" expanded="true" />
-                <element signature="e#2412#2413#0" expanded="true" />
-                <element signature="e#2468#2469#0" expanded="true" />
-                <element signature="e#2505#2506#0" expanded="true" />
-                <element signature="e#2540#2541#0" expanded="true" />
-                <element signature="e#2579#2580#0" expanded="true" />
-                <element signature="e#2615#2616#0" expanded="true" />
+                <element signature="e#643#644#0" expanded="true" />
+                <element signature="e#674#675#0" expanded="true" />
+                <element signature="e#712#713#0" expanded="true" />
+                <element signature="e#746#747#0" expanded="true" />
+                <element signature="e#792#793#0" expanded="true" />
+                <element signature="e#830#831#0" expanded="true" />
+                <element signature="e#895#896#0" expanded="true" />
+                <element signature="e#951#952#0" expanded="true" />
+                <element signature="e#988#989#0" expanded="true" />
+                <element signature="e#1023#1024#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DifferentialDriveRobot.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/simulation/DifferentialDriveRobot.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3729#3730#0" expanded="true" />
+                <element signature="e#3808#3809#0" expanded="true" />
+                <element signature="e#3847#3848#0" expanded="true" />
+                <element signature="e#3908#3909#0" expanded="true" />
+                <element signature="e#3944#3945#0" expanded="true" />
+                <element signature="e#4001#4002#0" expanded="true" />
+                <element signature="e#4041#4042#0" expanded="true" />
+                <element signature="e#4103#4104#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Field.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/simulation/Field.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+              <folding>
+                <element signature="e#384#385#0" expanded="true" />
+                <element signature="e#422#423#0" expanded="true" />
+                <element signature="e#463#464#0" expanded="true" />
+                <element signature="e#497#498#0" expanded="true" />
+                <element signature="e#526#527#0" expanded="true" />
+                <element signature="e#558#559#0" expanded="true" />
+                <element signature="e#675#676#0" expanded="true" />
+                <element signature="e#699#700#0" expanded="true" />
+                <element signature="e#730#731#0" expanded="true" />
+                <element signature="e#763#764#0" expanded="true" />
+                <element signature="e#1158#1159#0" expanded="true" />
+                <element signature="e#1192#1193#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EdgeTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/EdgeTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -65,23 +118,53 @@
         <entry file="file://$PROJECT_DIR$/src/simulation/Mover2D.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="10" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
+              <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="10" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1481#1482#0" expanded="true" />
-                <element signature="e#1577#1578#0" expanded="true" />
-                <element signature="e#1612#1613#0" expanded="true" />
-                <element signature="e#1643#1644#0" expanded="true" />
-                <element signature="e#1677#1678#0" expanded="true" />
-                <element signature="e#1708#1709#0" expanded="true" />
-                <element signature="e#2026#2027#0" expanded="true" />
-                <element signature="e#2087#2088#0" expanded="true" />
-                <element signature="e#2146#2147#0" expanded="true" />
-                <element signature="e#2197#2198#0" expanded="true" />
-                <element signature="e#2255#2256#0" expanded="true" />
-                <element signature="e#2305#2306#0" expanded="true" />
-                <element signature="e#2449#2450#0" expanded="true" />
-                <element signature="e#2485#2486#0" expanded="true" />
+                <element signature="e#1258#1259#0" expanded="true" />
+                <element signature="e#1330#1331#0" expanded="true" />
+                <element signature="e#1430#1431#0" expanded="true" />
+                <element signature="e#1461#1462#0" expanded="true" />
+                <element signature="e#1779#1780#0" expanded="true" />
+                <element signature="e#1840#1841#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FieldPanel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gui/FieldPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.5974643">
+              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#drawRobot#0;class#FieldPanel#0" expanded="false" />
+                <element signature="method#drawCarrotPoint#0;class#FieldPanel#0" expanded="false" />
+                <element signature="method#drawBackground#0;class#FieldPanel#0" expanded="false" />
+                <element signature="method#drawPath#0;class#FieldPanel#0" expanded="false" />
+                <element signature="method#drawClosestLine#0;class#FieldPanel#0" expanded="false" />
+                <element signature="method#drawPoint#0;class#FieldPanel#0" expanded="false" />
+                <element signature="method#setDrawCarrotPointEnabled#0;class#FieldPanel#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Vector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graphing/Vector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+              <folding>
+                <element signature="e#655#656#0" expanded="true" />
+                <element signature="e#708#709#0" expanded="true" />
+                <element signature="e#755#756#0" expanded="true" />
+                <element signature="e#801#802#0" expanded="true" />
+                <element signature="e#1047#1048#0" expanded="true" />
+                <element signature="e#1105#1106#0" expanded="true" />
+                <element signature="e#1136#1137#0" expanded="true" />
+                <element signature="e#1174#1175#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -128,23 +211,24 @@
         <option value="$PROJECT_DIR$/src/controller/FieldMouseMotionListener.java" />
         <option value="$PROJECT_DIR$/src/simulation/Mover2DTest.java" />
         <option value="$PROJECT_DIR$/src/test/Mover2DTest.java" />
-        <option value="$PROJECT_DIR$/src/simulation/Field.java" />
         <option value="$PROJECT_DIR$/src/geometry/Triangle.java" />
         <option value="$PROJECT_DIR$/src/geometry/Vertex.java" />
         <option value="$PROJECT_DIR$/src/geometry/Edge.java" />
         <option value="$PROJECT_DIR$/src/test/VertexTest.java" />
         <option value="$PROJECT_DIR$/src/test/TriangleTest.java" />
-        <option value="$PROJECT_DIR$/src/graphing/Vector.java" />
         <option value="$PROJECT_DIR$/src/test/EdgeTest.java" />
         <option value="$PROJECT_DIR$/src/gui/SimGui.form" />
         <option value="$PROJECT_DIR$/src/gui/SimGui.java" />
         <option value="$PROJECT_DIR$/src/gui/StringDrawer.java" />
-        <option value="$PROJECT_DIR$/src/graphing/Point.java" />
-        <option value="$PROJECT_DIR$/src/simulation/Path.java" />
-        <option value="$PROJECT_DIR$/src/gui/FieldPanel.java" />
         <option value="$PROJECT_DIR$/src/controller/FieldMouseListener.java" />
+        <option value="$PROJECT_DIR$/src/graphing/Vector.java" />
         <option value="$PROJECT_DIR$/src/simulation/Mover2D.java" />
+        <option value="$PROJECT_DIR$/src/simulation/Path.java" />
+        <option value="$PROJECT_DIR$/src/graphing/Point.java" />
         <option value="$PROJECT_DIR$/src/simulation/Robot.java" />
+        <option value="$PROJECT_DIR$/src/simulation/DifferentialDriveRobot.java" />
+        <option value="$PROJECT_DIR$/src/simulation/Field.java" />
+        <option value="$PROJECT_DIR$/src/gui/FieldPanel.java" />
       </list>
     </option>
   </component>
@@ -221,6 +305,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -296,10 +382,6 @@
               <option name="myItemId" value="gui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SimGui" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -312,46 +394,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FollowTheCarrotSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="follow-the-carrot-simulator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graphing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FollowTheCarrotSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="follow-the-carrot-simulator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="geometry" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -375,7 +417,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -422,14 +463,13 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FullScreen" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../2DMover/src/mover/Mover2D.java" />
+    <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/lib/apache/commons-math3-3.5/commons-math3-3.5-javadoc.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -462,7 +502,7 @@
       <recent name="logic" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SimGui">
+  <component name="RunManager" selected="JUnit.test in FollowTheCarrotSim">
     <configuration default="false" name="test in FollowTheCarrotSim" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -781,8 +821,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.All in FollowTheCarrotSim" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.test in FollowTheCarrotSim" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.test in FollowTheCarrotSim" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.All in FollowTheCarrotSim" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.EdgeTest" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.Mover2DTest" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.FieldTest" />
@@ -866,7 +906,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443393033803</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Improved robot movement. Started experimenting with accelleration.">
+      <created>1443478323171</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1443478323171</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -884,13 +930,13 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.49806523" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328934" sideWeight="0.45826423" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328934" sideWeight="0.44941956" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3532995" sideWeight="0.3233831" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.328934" sideWeight="0.55058044" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.49143174" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3532995" sideWeight="0.6766169" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3532995" sideWeight="0.66832507" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.48922056" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19513543" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -932,7 +978,8 @@
     <MESSAGE value="Refactored a lot of vertices to points" />
     <MESSAGE value="Movement of robot can now be simulated." />
     <MESSAGE value="Bug fixes. Color changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes. Color changes." />
+    <MESSAGE value="Improved robot movement. Started experimenting with accelleration." />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved robot movement. Started experimenting with accelleration." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -945,35 +992,22 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/graphing/Vector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-          <folding>
-            <element signature="e#384#385#0" expanded="true" />
-            <element signature="e#408#409#0" expanded="true" />
-            <element signature="e#1132#1133#0" expanded="true" />
-            <element signature="e#1170#1171#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/simulation/Robot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1654#1655#0" expanded="true" />
-            <element signature="e#1694#1695#0" expanded="true" />
-            <element signature="e#1858#1859#0" expanded="true" />
-            <element signature="e#1921#1922#0" expanded="true" />
-            <element signature="e#2412#2413#0" expanded="true" />
-            <element signature="e#2468#2469#0" expanded="true" />
-            <element signature="e#2505#2506#0" expanded="true" />
-            <element signature="e#2540#2541#0" expanded="true" />
-            <element signature="e#2579#2580#0" expanded="true" />
-            <element signature="e#2615#2616#0" expanded="true" />
+            <element signature="e#643#644#0" expanded="true" />
+            <element signature="e#674#675#0" expanded="true" />
+            <element signature="e#712#713#0" expanded="true" />
+            <element signature="e#746#747#0" expanded="true" />
+            <element signature="e#792#793#0" expanded="true" />
+            <element signature="e#830#831#0" expanded="true" />
+            <element signature="e#895#896#0" expanded="true" />
+            <element signature="e#951#952#0" expanded="true" />
+            <element signature="e#988#989#0" expanded="true" />
+            <element signature="e#1023#1024#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -986,8 +1020,8 @@
             <element signature="imports" expanded="true" />
             <element signature="method#concat#0;class#Path#0" expanded="false" />
             <element signature="method#getIndexOfClosestEdgeTo#0;class#Path#0" expanded="false" />
-            <element signature="e#4267#4268#0" expanded="true" />
-            <element signature="e#4302#4303#0" expanded="true" />
+            <element signature="e#4359#4360#0" expanded="true" />
+            <element signature="e#4394#4395#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1226,10 +1260,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="51" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
-          <folding>
-            <element signature="e#752#753#0" expanded="false" />
-            <element signature="e#794#795#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1255,27 +1285,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/graphing/Vector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="36" selection-start-line="44" selection-start-column="36" selection-end-line="44" selection-end-column="36" />
-          <folding>
-            <element signature="e#384#385#0" expanded="true" />
-            <element signature="e#408#409#0" expanded="true" />
-            <element signature="e#1132#1133#0" expanded="true" />
-            <element signature="e#1170#1171#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/EdgeTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/javax/swing/JComponent.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6819727">
@@ -1294,14 +1303,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/simulation/Field.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/SimGui.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1316,24 +1317,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
-          <folding>
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#378#379#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/simulation/Path.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="151" column="28" selection-start-line="151" selection-start-column="28" selection-end-line="151" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#concat#0;class#Path#0" expanded="false" />
-            <element signature="method#getIndexOfClosestEdgeTo#0;class#Path#0" expanded="false" />
-            <element signature="e#4267#4268#0" expanded="true" />
-            <element signature="e#4302#4303#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1345,27 +1328,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/graphing/Point.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="21" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
-          <folding>
-            <element signature="e#300#301#0" expanded="true" />
-            <element signature="e#326#327#0" expanded="true" />
-            <element signature="e#354#355#0" expanded="true" />
-            <element signature="e#378#379#0" expanded="true" />
-            <element signature="e#412#413#0" expanded="true" />
-            <element signature="e#438#439#0" expanded="true" />
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#545#546#0" expanded="true" />
-            <element signature="e#591#592#0" expanded="true" />
-            <element signature="e#649#650#0" expanded="true" />
-            <element signature="e#694#695#0" expanded="true" />
-            <element signature="e#753#754#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/geometry/Edge.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1374,20 +1336,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/FieldPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/graphing/Vector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0164745">
-          <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#drawRobot#0;class#FieldPanel#0" expanded="false" />
-            <element signature="method#drawCarrotPoint#0;class#FieldPanel#0" expanded="false" />
-            <element signature="method#drawBackground#0;class#FieldPanel#0" expanded="false" />
-            <element signature="method#drawPath#0;class#FieldPanel#0" expanded="false" />
-            <element signature="method#drawClosestLine#0;class#FieldPanel#0" expanded="false" />
-            <element signature="method#drawDebug#0;class#FieldPanel#0" expanded="false" />
-            <element signature="method#drawPoint#0;class#FieldPanel#0" expanded="false" />
-            <element signature="method#setDrawCarrotPointEnabled#0;class#FieldPanel#0" expanded="false" />
+            <element signature="e#655#656#0" expanded="true" />
+            <element signature="e#708#709#0" expanded="true" />
+            <element signature="e#755#756#0" expanded="true" />
+            <element signature="e#801#802#0" expanded="true" />
+            <element signature="e#1047#1048#0" expanded="true" />
+            <element signature="e#1105#1106#0" expanded="true" />
+            <element signature="e#1136#1137#0" expanded="true" />
+            <element signature="e#1174#1175#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1395,43 +1356,128 @@
     <entry file="file://$PROJECT_DIR$/src/simulation/Mover2D.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="10" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
+          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="10" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1481#1482#0" expanded="true" />
-            <element signature="e#1577#1578#0" expanded="true" />
-            <element signature="e#1612#1613#0" expanded="true" />
-            <element signature="e#1643#1644#0" expanded="true" />
-            <element signature="e#1677#1678#0" expanded="true" />
-            <element signature="e#1708#1709#0" expanded="true" />
-            <element signature="e#2026#2027#0" expanded="true" />
-            <element signature="e#2087#2088#0" expanded="true" />
-            <element signature="e#2146#2147#0" expanded="true" />
-            <element signature="e#2197#2198#0" expanded="true" />
-            <element signature="e#2255#2256#0" expanded="true" />
-            <element signature="e#2305#2306#0" expanded="true" />
-            <element signature="e#2449#2450#0" expanded="true" />
-            <element signature="e#2485#2486#0" expanded="true" />
+            <element signature="e#1258#1259#0" expanded="true" />
+            <element signature="e#1330#1331#0" expanded="true" />
+            <element signature="e#1430#1431#0" expanded="true" />
+            <element signature="e#1461#1462#0" expanded="true" />
+            <element signature="e#1779#1780#0" expanded="true" />
+            <element signature="e#1840#1841#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/simulation/Path.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39209226">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#concat#0;class#Path#0" expanded="false" />
+            <element signature="method#getIndexOfClosestEdgeTo#0;class#Path#0" expanded="false" />
+            <element signature="e#3587#3588#0" expanded="true" />
+            <element signature="e#3653#3654#0" expanded="true" />
+            <element signature="e#4359#4360#0" expanded="true" />
+            <element signature="e#4394#4395#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graphing/Point.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14003295">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#242#243#0" expanded="true" />
+            <element signature="e#266#267#0" expanded="true" />
+            <element signature="e#616#617#0" expanded="true" />
+            <element signature="e#675#676#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/EdgeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/simulation/DifferentialDriveRobot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3729#3730#0" expanded="true" />
+            <element signature="e#3808#3809#0" expanded="true" />
+            <element signature="e#3847#3848#0" expanded="true" />
+            <element signature="e#3908#3909#0" expanded="true" />
+            <element signature="e#3944#3945#0" expanded="true" />
+            <element signature="e#4001#4002#0" expanded="true" />
+            <element signature="e#4041#4042#0" expanded="true" />
+            <element signature="e#4103#4104#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/simulation/Robot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68204284">
-          <caret line="88" column="46" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1654#1655#0" expanded="true" />
-            <element signature="e#1694#1695#0" expanded="true" />
-            <element signature="e#1858#1859#0" expanded="true" />
-            <element signature="e#1921#1922#0" expanded="true" />
-            <element signature="e#2412#2413#0" expanded="true" />
-            <element signature="e#2468#2469#0" expanded="true" />
-            <element signature="e#2505#2506#0" expanded="true" />
-            <element signature="e#2540#2541#0" expanded="true" />
-            <element signature="e#2579#2580#0" expanded="true" />
-            <element signature="e#2615#2616#0" expanded="true" />
+            <element signature="e#643#644#0" expanded="true" />
+            <element signature="e#674#675#0" expanded="true" />
+            <element signature="e#712#713#0" expanded="true" />
+            <element signature="e#746#747#0" expanded="true" />
+            <element signature="e#792#793#0" expanded="true" />
+            <element signature="e#830#831#0" expanded="true" />
+            <element signature="e#895#896#0" expanded="true" />
+            <element signature="e#951#952#0" expanded="true" />
+            <element signature="e#988#989#0" expanded="true" />
+            <element signature="e#1023#1024#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/simulation/Field.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+          <folding>
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#463#464#0" expanded="true" />
+            <element signature="e#497#498#0" expanded="true" />
+            <element signature="e#526#527#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#675#676#0" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+            <element signature="e#730#731#0" expanded="true" />
+            <element signature="e#763#764#0" expanded="true" />
+            <element signature="e#1158#1159#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/FieldPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.5974643">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#drawRobot#0;class#FieldPanel#0" expanded="false" />
+            <element signature="method#drawCarrotPoint#0;class#FieldPanel#0" expanded="false" />
+            <element signature="method#drawBackground#0;class#FieldPanel#0" expanded="false" />
+            <element signature="method#drawPath#0;class#FieldPanel#0" expanded="false" />
+            <element signature="method#drawClosestLine#0;class#FieldPanel#0" expanded="false" />
+            <element signature="method#drawPoint#0;class#FieldPanel#0" expanded="false" />
+            <element signature="method#setDrawCarrotPointEnabled#0;class#FieldPanel#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1488,12 +1534,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>FollowTheCarrotSim</last-edited>
+          <last-edited>follow-the-carrot-simulator</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

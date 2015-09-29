@@ -53,7 +53,7 @@ public class Vector {
 
     @Override
     public String toString() {
-        return String.format("(%f, %f)", x, y);
+        return String.format("(%.1f, %.1f)", x, y);
     }
 
     public Point pointsTo() {

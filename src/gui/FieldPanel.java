@@ -3,6 +3,7 @@ package gui;
 import geometry.Edge;
 import geometry.Vertex;
 import graphing.Vector;
+import simulation.DifferentialDriveRobot;
 import simulation.Field;
 import graphing.Point;
 import simulation.Path;
@@ -19,49 +20,34 @@ public class FieldPanel extends JPanel {
 
     private static final int POINT_RADIUS = 4;
     private final Field field;
-    private final Robot robot;
     private boolean drawPathEnabled = true;
     private boolean drawClosestLineEnabled = true;
     private boolean drawCarrotPointEnabled = true;
     private boolean drawRobotEnabled = false;
-    private Point carrotPoint;
     private boolean running;
 
     public FieldPanel() {
         super();
         field = new Field();
-        robot = field.getRobot();
-        updateCarrotPoint();
     }
 
 
     public void run() {
 
-        running = true;
-        while(running && field.getPath().getEdges().size() > 0 && !robot.isAt(field.getPath().getEnd().toPoint())) {
+        if(field.getPath().getEdges().size() > 0 ) {
 
-            updateCarrotPoint();
-            robot.moveFor(0.03);
-            repaint();
-            try {
-                Thread.sleep(30);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+            running = true;
+            while(running && !robot.getPosition().isWithinDistanceTo(2.0, field.getPath().getEnd().toPoint())) {
 
-    public void updateCarrotPoint() {
-        try {
-            if(field.getPath().getEdges().size() > 1) {
-                carrotPoint = field.getPath().getCarrotPointFrom(robot.getPosition(), robot.getLookAheadDistance());
-                robot.setCarrotPoint(carrotPoint);
-            } else {
-                carrotPoint = null;
+                updateCarrotPoint();
+                ((DifferentialDriveRobot)robot).driveFor(0.03);
+                repaint();
+                try {
+                    Thread.sleep(30);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            carrotPoint = null;
         }
     }
 
@@ -175,7 +161,7 @@ public class FieldPanel extends JPanel {
 
         Point   position = robot.getPosition();
         double orientation = Math.toDegrees(robot.getOrientation());
-        double steeringAngle = Math.toDegrees(robot.getSteeringAngle());
+        double steeringAngle = Math.toDegrees(field.getSteeringAngle());
 
         String positionString       = "Position: (- , -)";
         String orientationString    = String.format("Orientation: %.1f°", orientation);
