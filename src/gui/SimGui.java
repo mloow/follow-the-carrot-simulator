@@ -20,6 +20,7 @@ public class SimGui {
     private JSlider carrotLengthSlider;
     private JCheckBox drawCarrotPathCheckBox;
     private JButton runButton;
+    private JComboBox comboBox1;
     private Thread simulationThread;
 
     public SimGui() {
@@ -41,8 +42,8 @@ public class SimGui {
         carrotLengthSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
-                fieldPanel.getField().getRobot().setLookAheadDistance(carrotLengthSlider.getValue());
-                fieldPanel.updateCarrotPoint();
+                fieldPanel.getField().getPath().setLookAheadDistance(carrotLengthSlider.getValue());
+                fieldPanel.getField().updateCarrotPoint();
                 fieldPanel.repaint();
             }
         });

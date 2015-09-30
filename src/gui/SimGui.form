@@ -21,65 +21,83 @@
         </border>
         <children/>
       </grid>
-      <grid id="fe65b" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="fe65b" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints border-constraint="South"/>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="c9260" class="javax.swing.JButton" binding="runButton" default-binding="true">
-            <constraints/>
-            <properties>
-              <text value="Run"/>
-            </properties>
-          </component>
-          <component id="273c4" class="javax.swing.JLabel">
-            <constraints/>
-            <properties>
-              <text value="Look ahead distance"/>
-            </properties>
-          </component>
-          <component id="c4007" class="javax.swing.JSlider" binding="carrotLengthSlider">
-            <constraints/>
-            <properties>
-              <majorTickSpacing value="100"/>
-              <maximum value="1000"/>
-              <minimum value="1"/>
-              <minorTickSpacing value="25"/>
-              <paintLabels value="false"/>
-              <paintTicks value="false"/>
-              <paintTrack value="true"/>
-              <value value="100"/>
-            </properties>
-          </component>
-          <component id="e19c7" class="javax.swing.JButton" binding="clearPathButton">
-            <constraints/>
-            <properties>
-              <label value="Clear Path"/>
-              <text value="Clear Path"/>
-            </properties>
-          </component>
-          <component id="f3106" class="javax.swing.JCheckBox" binding="drawClosestLineCheckBox" default-binding="true">
-            <constraints/>
-            <properties>
-              <enabled value="true"/>
-              <selected value="true"/>
-              <text value="Draw closest line"/>
-            </properties>
-          </component>
-          <component id="420f4" class="javax.swing.JCheckBox" binding="drawPathCheckBox" default-binding="true">
-            <constraints/>
-            <properties>
-              <selected value="true"/>
-              <text value="Draw path"/>
-            </properties>
-          </component>
-          <component id="f3e17" class="javax.swing.JCheckBox" binding="drawCarrotPathCheckBox" default-binding="true">
-            <constraints/>
-            <properties>
-              <selected value="true"/>
-              <text value="Draw carrot path"/>
-            </properties>
-          </component>
+          <grid id="5cc30" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="North"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="c9260" class="javax.swing.JButton" binding="runButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="Run"/>
+                </properties>
+              </component>
+              <component id="273c4" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Look ahead distance"/>
+                </properties>
+              </component>
+              <component id="c4007" class="javax.swing.JSlider" binding="carrotLengthSlider">
+                <constraints/>
+                <properties>
+                  <majorTickSpacing value="100"/>
+                  <maximum value="1000"/>
+                  <minimum value="1"/>
+                  <minorTickSpacing value="25"/>
+                  <paintLabels value="false"/>
+                  <paintTicks value="false"/>
+                  <paintTrack value="true"/>
+                  <value value="100"/>
+                </properties>
+              </component>
+              <component id="e19c7" class="javax.swing.JButton" binding="clearPathButton">
+                <constraints/>
+                <properties>
+                  <label value="Clear Path"/>
+                  <text value="Clear Path"/>
+                </properties>
+              </component>
+              <component id="d1a75" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </grid>
+          <grid id="4bdd7" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="South"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="f3106" class="javax.swing.JCheckBox" binding="drawClosestLineCheckBox" default-binding="true">
+                <constraints/>
+                <properties>
+                  <enabled value="true"/>
+                  <selected value="true"/>
+                  <text value="Draw closest line"/>
+                </properties>
+              </component>
+              <component id="420f4" class="javax.swing.JCheckBox" binding="drawPathCheckBox" default-binding="true">
+                <constraints/>
+                <properties>
+                  <selected value="true"/>
+                  <text value="Draw path"/>
+                </properties>
+              </component>
+              <component id="f3e17" class="javax.swing.JCheckBox" binding="drawCarrotPathCheckBox" default-binding="true">
+                <constraints/>
+                <properties>
+                  <selected value="true"/>
+                  <text value="Draw carrot path"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>

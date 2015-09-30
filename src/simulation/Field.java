@@ -18,7 +18,7 @@ public class Field {
     private Robot robot;
     private Point carrotPoint;
 
-    public Field(Robot robot) {
+    public Field() {
         this.path = new Path();
     }
 
@@ -45,13 +45,12 @@ public class Field {
 
     public void updateCarrotPoint() {
         try {
-            if(path.getEdges().size() > 1) {
+            if(path.getEdges().size() > 1 && robot != null) {
                 carrotPoint = path.getCarrotPointFrom(robot.getPosition());
             } else {
                 carrotPoint = null;
             }
         } catch (Exception e) {
-            e.printStackTrace();
             carrotPoint = null;
         }
     }

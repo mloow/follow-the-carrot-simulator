@@ -15,8 +15,8 @@ public class DifferentialDriveRobot extends Robot {
     private static final double TICK_PERIOD = 0.01;
 
     // physical constants
-    private final double wheelRadius = 15d;
-    private final double wheelAxisLength = 10d;
+    private final double wheelRadius = 1d;
+    private final double wheelAxisLength = 1d;
     private final double wheelMaxAngularVelocity = 2d * Math.PI;
     private final double wheelAngularAcceleration = 2d * Math.PI;
 
@@ -29,14 +29,14 @@ public class DifferentialDriveRobot extends Robot {
 
     public DifferentialDriveRobot() {
         setOrientation(Math.PI/4);
-        leftWheelAngularVelocity = 50;
-        rightWheelAngularVelocity = 50;
+        leftWheelAngularVelocity =  Math.PI;
+        rightWheelAngularVelocity = -Math.PI;
     }
 
     public void setTargetLinearSpeed(double targetLinearSpeed) {
 
         leftWheelAngularVelocity = targetLinearSpeed / wheelRadius;
-        rightWheelAngularVelocity = leftWheelAngularVelocity;
+        rightWheelAngularVelocity = leftWheelAngularVelocity*1.001;
 
     }
 
@@ -66,16 +66,15 @@ public class DifferentialDriveRobot extends Robot {
         RealMatrix distanceMatrix = getDistanceMatrix();
         RealMatrix iccMatrix      = getIccMatrix();
 
-        double[] pose = rotationMatrix.multiply(distanceMatrix).add(iccMatrix).getColumn(0);
+        RealMatrix poseMatrix = rotationMatrix.multiply(distanceMatrix).add(iccMatrix);
+
+        double[] pose = poseMatrix.getColumn(0);
 
         setPosition(new Point(pose[0], pose[1]));
         setOrientation(pose[2]);
     }
 
     private void updateWheelSpeeds() {
-
-
-
 
     }
 
@@ -123,8 +122,8 @@ public class DifferentialDriveRobot extends Robot {
     }
 
     private double distanceToIcc() {
-        return (wheelAxisLength / 2d) * ((leftWheelSpeed() + rightWheelSpeed()) /
-                                        (rightWheelSpeed() - leftWheelSpeed()));
+        return (wheelAxisLength / 2d) * ((leftWheelSpeed()  + rightWheelSpeed()) /
+                                         (rightWheelSpeed() -  leftWheelSpeed()));
     }
 
     private double rateOfRotation() {
@@ -135,12 +134,12 @@ public class DifferentialDriveRobot extends Robot {
         return leftWheelAngularVelocity * wheelRadius;
     }
 
-    private double linearSpeed() {
-        return rateOfRotation() * distanceToIcc();
-    }
-
     private double rightWheelSpeed() {
         return rightWheelAngularVelocity * wheelRadius;
+    }
+
+    public double getLinearSpeed() {
+        return rateOfRotation() * distanceToIcc();
     }
 
 }

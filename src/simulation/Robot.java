@@ -36,7 +36,14 @@ public class Robot {
     }
 
     public void setOrientation(double rad) {
-        this.orientation = rad;
+
+        if(rad > 2 * Math.PI) {
+            setOrientation(rad - 2 * Math.PI);
+        } else if (rad < -2 * Math.PI) {
+            setOrientation(rad + 2 * Math.PI);
+        } else {
+            this.orientation = rad;
+        }
     }
 
     public void setTrackPathEnabled(boolean trackPathEnabled) {

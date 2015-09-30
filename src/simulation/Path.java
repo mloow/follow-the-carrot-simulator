@@ -155,4 +155,8 @@ public class Path {
     public int getSize() {
         return edges.size();
     }
+
+    public void setLookAheadDistance(double lookAheadDistance) {
+        this.lookAheadDistance = lookAheadDistance;
+    }
 }
