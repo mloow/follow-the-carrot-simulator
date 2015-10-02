@@ -41,8 +41,10 @@ public class FieldPanel extends JPanel {
         if(robot == null) return;
 
         running = true;
-        //while(running && !robot.getPosition().isWithinDistanceTo(2.0, field.getPath().getEnd().toPoint())) {
         while(running) {
+
+
+            robot.setTargetLinearSpeed(50.0);
             robot.driveFor(0.03);
 
             field.updateCarrotPoint();
@@ -95,7 +97,11 @@ public class FieldPanel extends JPanel {
 
         Path robotPath = robot.getTraveledPath();
         for(Edge e : robotPath.getEdges()) {
-            graphics.drawLine((int) e.start.x, (int) e.start.y, (int) e.end.x, (int) e.end.y);
+            int x1 = (int) e.start.x;
+            int y1 = (int) (this.getHeight() - e.start.y);
+            int x2 = (int) e.end.x;
+            int y2 = (int) (this.getHeight() - e.end.y);
+            graphics.drawLine(x1, y1, x2, y2);
         }
     }
 
@@ -107,12 +113,12 @@ public class FieldPanel extends JPanel {
 
         Point robotPos = robot.getPosition();
         int x1 = (int) robotPos.getX();
-        int y1 = (int) robotPos.getY();
+        int y1 = (int) (this.getHeight() - robotPos.getY());
         drawPoint(x1, y1, new Color(128, 255, 0), graphics);
 
         Vector orientation = new Vector(Math.cos(robot.getOrientation()), Math.sin(robot.getOrientation()));
         int x2 = x1 + (int) orientation.scale(20).getX();
-        int y2 = y1 + (int) orientation.scale(20).getY();
+        int y2 = y1 - (int) orientation.scale(20).getY();
 
         graphics.drawLine(x1, y1, x2, y2);
     }
@@ -125,12 +131,21 @@ public class FieldPanel extends JPanel {
 
         Point robotPos = robot.getPosition();
         Graphics2D g2d = (Graphics2D) graphics;
-        drawPoint((int) carrotPoint.getX(), (int) carrotPoint.getY(), new Color(255, 128, 0), graphics);
+
+        int cX = (int) carrotPoint.getX();
+        int cY = (int) (this.getHeight() - carrotPoint.getY());
+
+        drawPoint(cX, cY, new Color(255, 128, 0), graphics);
+
+        int rX = (int) robotPos.getX();
+        int rY = (int) (this.getHeight() - robotPos.getY());
+
+
         g2d.setStroke(new BasicStroke(1));
-        g2d.drawLine((int) robotPos.getX(), (int) robotPos.getY(), (int) carrotPoint.getX(), (int) carrotPoint.getY());
+        g2d.drawLine(rX, rY, cX, cY);
 
         String s = String.format("(%.1f, %.1f)", carrotPoint.getX(), carrotPoint.getY());
-        graphics.drawString(s, (int) carrotPoint.getX() + 25, (int) carrotPoint.getY() - 25);
+        graphics.drawString(s, cX + 25, cY + 25);
 
     }
 
@@ -145,19 +160,24 @@ public class FieldPanel extends JPanel {
         if(field.getPath().getEdges().size() < 1) return;
 
         Vertex start = path.getStart();
-        drawPoint((int) start.x, (int) start.y, Color.green, graphics);
+        drawPoint((int) start.x, (int) (this.getHeight() - start.y), Color.green, graphics);
 
         Graphics2D g2d = (Graphics2D) graphics;
         g2d.setColor(new Color(128, 128, 128));
         g2d.setStroke(new BasicStroke(3));
 
         for(Edge e : path.getEdges()) {
-            g2d.draw(new Line2D.Float((int) e.start.x, (int) e.start.y, (int) e.end.x, (int) e.end.y));
+
+            int x1 = (int) e.start.x;
+            int y1 = (int) (this.getHeight() - e.start.y);
+            int x2 = (int) e.end.x;
+            int y2 = (int) (this.getHeight() - e.end.y);
+            g2d.draw(new Line2D.Float(x1, y1, x2, y2));
         }
 
         if(path.getEnd() != null) {
             Vertex end = path.getEnd();
-            drawPoint((int) end.x, (int) end.y, Color.red, graphics);
+            drawPoint((int) end.x, (int)(this.getHeight() - end.y) , Color.red, graphics);
         }
     }
 
@@ -176,7 +196,12 @@ public class FieldPanel extends JPanel {
             Edge e = field.getPath().getClosestEdgeTo(robotPos);
             Point closest = e.getClosestPointTo(robotPos);
 
-            graphics.drawLine((int) robotPos.getX(), (int) robotPos.getY(), (int) closest.getX(), (int) closest.getY());
+            int rX = (int) robotPos.getX();
+            int rY = (int) (this.getHeight() - robotPos.getY());
+            int clX = (int) closest.getX();
+            int clY = (int) (this.getHeight() - closest.getY());
+
+            graphics.drawLine(rX, rY, clX, clY);
         }
 
     }
