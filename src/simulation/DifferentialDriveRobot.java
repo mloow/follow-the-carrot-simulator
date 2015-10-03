@@ -30,13 +30,13 @@ public class DifferentialDriveRobot extends Robot {
     public DifferentialDriveRobot() {
         setOrientation(Math.PI/4);
         leftWheelAngularVelocity =  Math.PI;
-        rightWheelAngularVelocity = -Math.PI;
+        rightWheelAngularVelocity = Math.PI;
     }
 
     public void setTargetLinearSpeed(double targetLinearSpeed) {
 
         leftWheelAngularVelocity = targetLinearSpeed / wheelRadius;
-        rightWheelAngularVelocity = leftWheelAngularVelocity*1.001;
+        rightWheelAngularVelocity = leftWheelAngularVelocity;
 
     }
 
@@ -62,16 +62,26 @@ public class DifferentialDriveRobot extends Robot {
 
         updateWheelSpeeds();
 
-        RealMatrix rotationMatrix = getRotationMatrix();
-        RealMatrix distanceMatrix = getDistanceMatrix();
-        RealMatrix iccMatrix      = getIccMatrix();
+        if(leftWheelAngularVelocity == rightWheelAngularVelocity) {
+            double x = getPosition().getX() + leftWheelAngularVelocity * Math.cos(getOrientation()) * TICK_PERIOD;
+            double y = getPosition().getY() + leftWheelAngularVelocity * Math.sin(getOrientation()) * TICK_PERIOD;
+            setPosition(new Point(x, y));
+        } else if(rightWheelAngularVelocity == -leftWheelAngularVelocity) {
+            setOrientation(getOrientation() + 2 * rightWheelAngularVelocity * TICK_PERIOD / wheelAxisLength);
+        } else {
 
-        RealMatrix poseMatrix = rotationMatrix.multiply(distanceMatrix).add(iccMatrix);
+            RealMatrix rotationMatrix = getRotationMatrix();
+            RealMatrix distanceMatrix = getDistanceMatrix();
+            RealMatrix iccMatrix      = getIccMatrix();
 
-        double[] pose = poseMatrix.getColumn(0);
+            RealMatrix poseMatrix = rotationMatrix.multiply(distanceMatrix).add(iccMatrix);
 
-        setPosition(new Point(pose[0], pose[1]));
-        setOrientation(pose[2]);
+            double[] pose = poseMatrix.getColumn(0);
+
+            setPosition(new Point(pose[0], pose[1]));
+            setOrientation(pose[2]);
+        }
+
     }
 
     private void updateWheelSpeeds() {
