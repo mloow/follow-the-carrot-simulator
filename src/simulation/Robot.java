@@ -37,9 +37,9 @@ public class Robot {
 
     public void setOrientation(double rad) {
 
-        if(rad > 2 * Math.PI) {
+        if(rad > Math.PI) {
             setOrientation(rad - 2 * Math.PI);
-        } else if (rad < -2 * Math.PI) {
+        } else if (rad < - Math.PI) {
             setOrientation(rad + 2 * Math.PI);
         } else {
             this.orientation = rad;

@@ -36,7 +36,11 @@ public class Field {
     }
 
     public double getSteeringAngle() {
-        return 0;
+        if(carrotPoint == null || robot == null) return 0.0;
+
+        double carrotAngle = new Point(0, 0).getAngleTo(carrotPoint);
+        return carrotAngle - robot.getOrientation();
+
     }
 
     public Robot getRobot() {

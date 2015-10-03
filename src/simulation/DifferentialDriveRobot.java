@@ -15,8 +15,8 @@ public class DifferentialDriveRobot extends Robot {
     private static final double TICK_PERIOD = 0.01;
 
     // physical constants
-    private final double wheelRadius = 1d;
-    private final double wheelAxisLength = 1d;
+    private final double wheelRadius = 10d;
+    private final double wheelAxisLength = 15d;
     private final double wheelMaxAngularVelocity = 2d * Math.PI;
     private final double wheelAngularAcceleration = 2d * Math.PI;
 
