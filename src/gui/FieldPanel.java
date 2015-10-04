@@ -12,6 +12,8 @@ import simulation.Path;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by marcus on 2015-09-19.
@@ -29,6 +31,7 @@ public class FieldPanel extends JPanel {
     private boolean drawRobotPathEnabled = true;
     
     private boolean running;
+    private long elapsedRunTime;
 
     public FieldPanel() {
         super();
@@ -40,17 +43,39 @@ public class FieldPanel extends JPanel {
         DifferentialDriveRobot robot = (DifferentialDriveRobot) field.getRobot();
         if(robot == null) return;
 
+        elapsedRunTime = 0L;
         running = true;
         while(running) {
 
+            double distanceLeft = 0;
+            if(field.getPath().getEnd() != null) {
+                distanceLeft = robot.getPosition().getDistanceTo(field.getPath().getEnd().toPoint());
+            }
+            long start = System.currentTimeMillis();
+            robot.setTargetLinearSpeed(80);
+            if(field.getSteeringAngle() > Math.PI/4) {
+                robot.setTargetLinearSpeed(50);
+            }
 
-            robot.setTargetLinearSpeed(50.0);
+            if(distanceLeft < 50) {
+                robot.setTargetLinearSpeed(Math.max(10, robot.getLinearSpeed() - 1));
+            }
+
+            robot.setTargetAngularSpeed(field.getSteeringAngle());
             robot.driveFor(0.03);
 
+            if(distanceLeft < 5) {
+                running = false;
+                robot.setTargetLinearSpeed(0);
+            }
             field.updateCarrotPoint();
+            elapsedRunTime += 30L;
+            long computationTime = System.currentTimeMillis() - start;
+            start = System.currentTimeMillis();
             repaint();
+            long paintTime = System.currentTimeMillis() - start;
             try {
-                Thread.sleep(30);
+                Thread.sleep(Math.max(30 - computationTime - paintTime, 1));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -214,19 +239,13 @@ public class FieldPanel extends JPanel {
 
         Point   position = robot.getPosition();
         double orientation = Math.toDegrees(robot.getOrientation());
-        double steeringAngle = Math.toDegrees(field.getSteeringAngle());
+
 
         String positionString       = "Position: " +position.toString();
         String speedString          = String.format("Linear speed: %.1f", ((DifferentialDriveRobot) robot).getLinearSpeed());
         String orientationString    = String.format("Orientation: %.1f°", orientation);
-        String steeringString       = String.format("Steering angle: %.1f°", steeringAngle);
-        String carrotAngleString    = "Carrot angle: -";
-        String cpDisString          = "C.P distance: -";
+        String elapsedString        = "Elapsed: " + new SimpleDateFormat("mm:ss.SS").format(new Date(elapsedRunTime));
 
-        if (field.getCarrotPoint() != null) {
-             cpDisString      = String.format("C.P distance: %.1f", position.getDistanceTo(field.getCarrotPoint()));
-            carrotAngleString = String.format("Carrot angle: %.1f°", Math.toDegrees(position.getAngleTo(field.getCarrotPoint())));
-        }
 
         graphics.setColor(Color.white);
 
@@ -236,9 +255,7 @@ public class FieldPanel extends JPanel {
                 positionString,
                 speedString,
                 orientationString,
-                steeringString,
-                carrotAngleString,
-                cpDisString);
+                elapsedString);
 
     }
 

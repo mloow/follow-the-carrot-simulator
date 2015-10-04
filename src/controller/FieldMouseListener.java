@@ -47,6 +47,8 @@ public class FieldMouseListener implements MouseListener, MouseMotionListener, M
                 fieldPanel.repaint();
             } else {
                 field.setRobot(null);
+                fieldPanel.setRunning(false);
+                field.updateCarrotPoint();
                 fieldPanel.repaint();
             }
         }

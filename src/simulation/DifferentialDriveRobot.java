@@ -17,8 +17,8 @@ public class DifferentialDriveRobot extends Robot {
     // physical constants
     private final double wheelRadius = 10d;
     private final double wheelAxisLength = 15d;
-    private final double wheelMaxAngularVelocity = 2d * Math.PI;
-    private final double wheelAngularAcceleration = 2d * Math.PI;
+    private final double maxLinearSpeed = 80.0;
+    private final double wheelAngularAcceleration = 3d * Math.PI;
 
     // variables
     private double leftWheelAngularVelocity;
@@ -29,24 +29,27 @@ public class DifferentialDriveRobot extends Robot {
 
     public DifferentialDriveRobot() {
         setOrientation(Math.PI/4);
-        leftWheelAngularVelocity =  Math.PI;
-        rightWheelAngularVelocity = Math.PI;
+        leftWheelAngularVelocity =  0;
+        rightWheelAngularVelocity = 0;
+    }
+
+    private void setLeftWheelForwardSpeed(double forwardSpeed) {
+        leftWheelAngularVelocity = forwardSpeed / wheelRadius;
+    }
+
+    private void setRightWheelForwardSpeed(double forwardSpeed) {
+        rightWheelAngularVelocity = forwardSpeed / wheelRadius;
     }
 
     public void setTargetLinearSpeed(double targetLinearSpeed) {
 
-        leftWheelAngularVelocity = targetLinearSpeed / wheelRadius;
-        rightWheelAngularVelocity = leftWheelAngularVelocity;
-
+        this.targetLinearSpeed = Math.min(targetLinearSpeed, maxLinearSpeed);
     }
 
     public void setTargetAngularSpeed(double targetAngularSpeed) {
 
-        double change = ((targetAngularSpeed / wheelAxisLength) / (rightWheelSpeed() - leftWheelSpeed())) / 2d;
-        double changeInAngularWheelVelocity = change / wheelRadius;
+        this.targetAngularSpeed = targetAngularSpeed;
 
-        rightWheelAngularVelocity += changeInAngularWheelVelocity;
-        leftWheelAngularVelocity  -= changeInAngularWheelVelocity;
     }
 
     public void driveFor(double seconds) {
@@ -63,11 +66,11 @@ public class DifferentialDriveRobot extends Robot {
         updateWheelSpeeds();
 
         if(leftWheelAngularVelocity == rightWheelAngularVelocity) {
-            double x = getPosition().getX() + leftWheelAngularVelocity * Math.cos(getOrientation()) * TICK_PERIOD;
-            double y = getPosition().getY() + leftWheelAngularVelocity * Math.sin(getOrientation()) * TICK_PERIOD;
+            double x = getPosition().getX() + leftWheelSpeed() * Math.cos(getOrientation()) * TICK_PERIOD;
+            double y = getPosition().getY() + leftWheelSpeed() * Math.sin(getOrientation()) * TICK_PERIOD;
             setPosition(new Point(x, y));
         } else if(rightWheelAngularVelocity == -leftWheelAngularVelocity) {
-            setOrientation(getOrientation() + 2 * rightWheelAngularVelocity * TICK_PERIOD / wheelAxisLength);
+            setOrientation(getOrientation() + 2 * rightWheelSpeed() * TICK_PERIOD / wheelAxisLength);
         } else {
 
             RealMatrix rotationMatrix = getRotationMatrix();
@@ -85,6 +88,20 @@ public class DifferentialDriveRobot extends Robot {
     }
 
     private void updateWheelSpeeds() {
+
+        double targetLeftWheelSpeed = targetLinearSpeed - ((targetAngularSpeed*wheelAxisLength) / 2);
+        double targetRightWheelSpeed = targetLinearSpeed + ((targetAngularSpeed*wheelAxisLength) / 2);
+
+        double targetLeftWheelAngularVelocity = targetLeftWheelSpeed / wheelRadius;
+        double targetRightWheelAngularVelocity = targetRightWheelSpeed / wheelRadius;
+
+        double leftWheelChange = Math.signum(targetLeftWheelAngularVelocity - leftWheelAngularVelocity)
+                * wheelAngularAcceleration*TICK_PERIOD;
+        double rightWheelChange = Math.signum(targetRightWheelAngularVelocity - rightWheelAngularVelocity)
+                * wheelAngularAcceleration*TICK_PERIOD;
+
+        leftWheelAngularVelocity += leftWheelChange;
+        rightWheelAngularVelocity += rightWheelChange;
 
     }
 
@@ -149,7 +166,7 @@ public class DifferentialDriveRobot extends Robot {
     }
 
     public double getLinearSpeed() {
-        return rateOfRotation() * distanceToIcc();
+        return (leftWheelSpeed() + rightWheelSpeed()) / 2.0;
     }
 
 }

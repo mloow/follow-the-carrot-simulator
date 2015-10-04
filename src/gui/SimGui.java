@@ -34,6 +34,7 @@ public class SimGui {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 fieldPanel.getField().getPath().clear();
+                fieldPanel.getField().updateCarrotPoint();
                 fieldPanel.repaint();
             }
         });
